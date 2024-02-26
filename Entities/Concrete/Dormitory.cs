@@ -9,5 +9,6 @@ namespace Entities.Concrete
 {
     public class Dormitory : IEntity
     {
+        public int Id { get; set; }
     }
 }

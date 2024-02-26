@@ -9,5 +9,6 @@ namespace Entities.Concrete
 {
     public class University : IEntity
     {
+        public int Id { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace Entities.Concrete
 {
     public class Notification : IEntity
     {
+        public int Id { get; set; }
     }
 }
