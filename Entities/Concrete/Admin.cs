@@ -9,6 +9,6 @@ namespace Entities.Concrete
 {
     public class Admin:IEntity
     {
-
+        public int Id { get; set; }
     }
 }
