@@ -25,17 +25,19 @@ namespace Business.Concrete
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var admin = _adminDal.Get(p => p.UserId == id);
+            _adminDal.Delete(admin);
         }
 
         public List<Admin> GetAll()
         {
-            throw new NotImplementedException();
+            return _adminDal.GetList().ToList();
         }
 
         public Admin GetById(int id)
         {
-            throw new NotImplementedException();
+            var admin = _adminDal.Get(p => p.UserId == id);
+            return admin;
         }
 
         public void Update(Admin admin)

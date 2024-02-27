@@ -17,7 +17,7 @@ namespace API.Controllers
             _adminService = adminService;
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public IActionResult Get()
         {
 
@@ -32,6 +32,22 @@ namespace API.Controllers
             _adminService.Add(admin);
             return Ok(admin);
 
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete(int id)
+        {
+            var adminToDelete=_adminService.GetById(id);
+            _adminService.Delete(id);
+            return Ok(adminToDelete);
+        }
+
+        [HttpPut("update")]
+        public IActionResult Put(int id)
+        {
+            var adminToUpdate = _adminService.GetById(id);
+
+            return Ok(adminToUpdate);
         }
     }
 }
