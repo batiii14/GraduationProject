@@ -9,6 +9,14 @@ namespace Entities.Concrete
 {
     public class Notification : IEntity
     {
-        public int Id { get; set; }
+        public int NotificationId { get; set; }
+        public String Title { get; set; }
+        public string Description { get; set; }
+        public String ImageUrl { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public int RecieverId { get; set; }
+        public int SenderId { get; set; }
+        public Boolean Seen { get; set; }
     }
 }

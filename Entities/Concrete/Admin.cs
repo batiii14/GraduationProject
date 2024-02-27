@@ -11,8 +11,18 @@ namespace Entities.Concrete
     public class Admin:IEntity
     {
         [Key]
-        public int Id { get; set; }
-
-        public String? Name { get; set; }
+        public int UserId { get; set; }
+        public String Name { get; set; }
+        public String SurName { get; set; }
+        public String Email { get; set; }
+        public String Password { get; set; }
+        public String Address { get; set; }
+        public String PhoneNo { get; set; }
+        public Boolean isEmailVerified { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public DateTime Dob { get; set; }
+        public String ProfileUrl { get; set; }
+        
     }
 }

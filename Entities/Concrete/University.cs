@@ -9,6 +9,11 @@ namespace Entities.Concrete
 {
     public class University : IEntity
     {
-        public int Id { get; set; }
+        public int UniversityId { get; set; }
+        public String Name { get; set; }
+        public String Address { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
     }
 }
