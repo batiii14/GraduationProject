@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GraduationProjectContext))]
-    [Migration("20240227153937_oldumu")]
-    partial class oldumu
+    [Migration("20240227161833_fdsafds")]
+    partial class fdsafds
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
