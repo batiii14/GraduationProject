@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,32 @@ namespace Business.Concrete
 {
     public class NotificationManager : INotificationService
     {
+        private INotificationDal _notificationDal;
+
+        public NotificationManager(INotificationDal notificationDal)
+        {
+            _notificationDal = notificationDal;
+        }
         public void Add(Notification notification)
         {
-            throw new NotImplementedException();
+            _notificationDal.Add(notification);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var notification=_notificationDal.Get(p=>p.NotificationId==id);
+            _notificationDal.Delete(notification);
         }
 
         public List<Notification> GetAll()
         {
-            throw new NotImplementedException();
+            return _notificationDal.GetList().ToList();
         }
 
         public Notification GetById(int id)
         {
-            throw new NotImplementedException();
+            return _notificationDal.Get(p => p.NotificationId == id);
+
         }
 
         public void Update(Notification notification)

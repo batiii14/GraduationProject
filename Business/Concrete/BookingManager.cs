@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,33 @@ namespace Business.Concrete
 {
     public class BookingManager : IBookingService
     {
+        private IBookingDal _bookingDal;
+
+        public BookingManager(IBookingDal bookingDal)
+        {
+            _bookingDal = bookingDal;
+        }
+
         public void Add(Booking booking)
         {
-            throw new NotImplementedException();
+           _bookingDal.Add(booking);    
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var bookingToDelete=_bookingDal.Get(p=>p.BookingId== id);
+            _bookingDal.Delete(bookingToDelete);
         }
 
         public List<Booking> GetAll()
         {
-            throw new NotImplementedException();
+            return _bookingDal.GetList().ToList();
         }
 
         public Booking GetById(int id)
         {
-            throw new NotImplementedException();
+            var booking = _bookingDal.Get(p => p.BookingId == id);
+            return booking;
         }
 
         public void Update(Booking booking)

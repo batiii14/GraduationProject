@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,33 @@ namespace Business.Concrete
 {
     public class DormitoryOwnerManager : IDormitoryOwnerService
     {
+
+        private IDormitoryOwnerDal _dormitoryOwnerDal;
+
+        public DormitoryOwnerManager(IDormitoryOwnerDal dormitoryOwnerDal)
+        {
+            _dormitoryOwnerDal = dormitoryOwnerDal;
+        }
         public void Add(DormitoryOwner dormitoryOwner)
         {
-            throw new NotImplementedException();
+            _dormitoryOwnerDal.Add(dormitoryOwner);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var dormOwner=_dormitoryOwnerDal.Get(p=>p.UserId == id);
+            _dormitoryOwnerDal.Delete(dormOwner);
         }
 
         public List<DormitoryOwner> GetAll()
         {
-            throw new NotImplementedException();
+            return _dormitoryOwnerDal.GetList().ToList();
         }
 
         public DormitoryOwner GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dormitoryOwnerDal.Get(p=>p.UserId == id);
+
         }
 
         public void Update(DormitoryOwner dormitoryOwner)

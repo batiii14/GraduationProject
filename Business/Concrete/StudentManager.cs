@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,32 @@ namespace Business.Concrete
 {
     public class StudentManager : IStudentService
     {
+        private IStudentDal _studentDal;
+
+        public StudentManager(IStudentDal studentDal)
+        {
+            _studentDal = studentDal;
+        }
         public void Add(Student student)
         {
-            throw new NotImplementedException();
+            _studentDal.Add(student);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var student=_studentDal.Get(p=>p.UserId == id);
+            _studentDal.Delete(student);
         }
 
         public List<Student> GetAll()
         {
-            throw new NotImplementedException();
+            return _studentDal.GetList().ToList();
         }
 
         public Student GetById(int id)
         {
-            throw new NotImplementedException();
+            return _studentDal.Get(p => p.UserId == id);
+
         }
 
         public void Update(Student student)

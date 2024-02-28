@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,31 @@ namespace Business.Concrete
 {
     public class MessageManager : IMessageService
     {
+        private IMessageDal _messageDal;
+        public MessageManager(IMessageDal messageDal)
+        {
+            _messageDal = messageDal;
+        }
         public void Add(Message message)
         {
-            throw new NotImplementedException();
+            _messageDal.Add(message);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var message=_messageDal.Get(p=>p.MessageId == id);
+            _messageDal.Delete(message);
         }
 
         public List<Message> GetAll()
         {
-            throw new NotImplementedException();
+            return _messageDal.GetList().ToList();
         }
 
         public Message GetById(int id)
         {
-            throw new NotImplementedException();
+            return _messageDal.Get(p=>p.MessageId == id);
+
         }
 
         public void Update(Message message)
