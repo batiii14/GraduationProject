@@ -43,5 +43,26 @@ namespace Business.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public Notification GetNotificationByStudentId(int studentId)
+        {
+            Notification _notification = new Notification();
+            var notificationList = _notificationDal.GetList().ToList();
+            foreach (var notification in notificationList)
+            {
+                if (notification.RecieverId == studentId)
+                {
+                    _notification = notification;
+                    break;
+                }
+
+            }
+            if (_notification == null)
+            {
+                throw new Exception("Kullanıcıya ait bir bildirim yok");
+            }
+
+            return _notification;
+        }
     }
 }
