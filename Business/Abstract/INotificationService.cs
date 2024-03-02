@@ -14,5 +14,6 @@ namespace Business.Abstract
         void Update(Notification notification);
         List<Notification> GetAll();
         Notification GetById(int id);
+        Notification GetNotificationByStudentId(int studentId);
     }
 }

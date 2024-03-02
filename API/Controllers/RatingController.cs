@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,13 @@ namespace API.Controllers
     {
 
         IRatingService _ratingService;
+        IBookingService _bookingService;
 
-        public RatingController(IRatingService ratingService)
+        public RatingController(IRatingService ratingService, IBookingService bookingService)
         {
+
             _ratingService = ratingService;
+            _bookingService = bookingService;
         }
 
         [HttpPost("add")]
@@ -47,5 +51,20 @@ namespace API.Controllers
             return Ok(ratingToUpdate);
         }
 
+        [HttpPost("AddRatingToDormitory")]
+        public IActionResult PostRatingToDormitoryByUserId(Rating rating) 
+        {
+            var bookingHistories = _bookingService.GetAll();
+            List<Booking> bookings = new List<Booking>();
+            foreach (var booking in bookingHistories)
+            {
+                if(booking.UserId == rating.UserId)
+                {
+                  _ratingService.Add(rating);
+                }
+
+            }
+            return Ok(rating);
+        }
     }
 }

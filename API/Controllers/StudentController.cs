@@ -10,10 +10,12 @@ namespace API.Controllers
     public class StudentController : ControllerBase
     {
         IStudentService _studentService;
+        INotificationService _notificationService;
 
-        public StudentController(IStudentService studentService)
+        public StudentController(IStudentService studentService, INotificationService notificationService)
         {
             _studentService = studentService;
+            _notificationService = notificationService;
         }
 
         [HttpPost("add")]
@@ -44,6 +46,13 @@ namespace API.Controllers
             var studentToUpdate = _studentService.GetById(id);
 
             return Ok(studentToUpdate);
+        }
+
+        [HttpGet("GetNotificationByStudentId")]
+        public IActionResult ViewNotifications(int studentId) 
+        {
+            var notification = _notificationService.GetNotificationByStudentId(studentId);
+            return Ok(notification);
         }
     }
 }
