@@ -18,12 +18,13 @@ namespace Business.Concrete
         }
         public void Add(Message message)
         {
+
             _messageDal.Add(message);
         }
 
         public void Delete(int id)
         {
-            var message=_messageDal.Get(p=>p.MessageId == id);
+            var message = _messageDal.Get(p => p.MessageId == id);
             _messageDal.Delete(message);
         }
 
@@ -34,8 +35,13 @@ namespace Business.Concrete
 
         public Message GetById(int id)
         {
-            return _messageDal.Get(p=>p.MessageId == id);
+            return _messageDal.Get(p => p.MessageId == id);
 
+        }
+        public List<Message> GetAllMessagesByStudentId(int studentId)
+        {
+
+            return _messageDal.GetList().Where(p => p.ReciverId == studentId).ToList();
         }
 
         public void Update(Message message)

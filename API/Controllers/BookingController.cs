@@ -10,10 +10,26 @@ namespace API.Controllers
     public class BookingController : ControllerBase
     {
         IBookingService _bookingService;
+        
 
         public BookingController(IBookingService bookingService)
         {
             _bookingService = bookingService;
+        }
+
+        [HttpGet("GetBookingHistoryByStudentId")]
+        public IActionResult GetBookingHistoryByStudentId(int studentId)
+        {
+            var bookingHistories=_bookingService.GetAll();
+            List<Booking> bookings = new List<Booking>();
+            foreach (var item in bookingHistories)
+            {
+                if (item.UserId == studentId)
+                {
+                    bookings.Add(item);
+                }   
+            }
+            return Ok(bookings);
         }
 
         [HttpPost("add")]
@@ -24,14 +40,16 @@ namespace API.Controllers
         }
 
         [HttpGet("getAll")]
-        public IActionResult GetAll() {
-            var bookings= _bookingService.GetAll();
-            
+        public IActionResult GetAll()
+        {
+            var bookings = _bookingService.GetAll();
+
             return Ok(bookings);
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(int id) {
+        public IActionResult Delete(int id)
+        {
             var bookingToDelete = _bookingService.GetById(id);
             _bookingService.Delete(id);
 
@@ -39,8 +57,9 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id,int RoomId,String Status) {
-            var bookingToUpdate = _bookingService.GetById(id); 
+        public IActionResult Put(int id, int RoomId, String Status)
+        {
+            var bookingToUpdate = _bookingService.GetById(id);
             bookingToUpdate.Status = Status;
             bookingToUpdate.RoomId = RoomId;
             bookingToUpdate.UpdatedAt = DateTime.Now;

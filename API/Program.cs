@@ -50,6 +50,9 @@ builder.Services.AddScoped<IStudentDal,StudentDal>();
 builder.Services.AddScoped<IUniversityService,UniversityManager>();
 builder.Services.AddScoped<IUniversityDal,UniversityDal>();
 
+builder.Services.AddScoped<ILoginService, LoginManager>();
+builder.Services.AddScoped<ILoginDal,LoginDal>();
+
 
 builder.Services.AddCors(opt => opt.AddDefaultPolicy(p => { p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
 

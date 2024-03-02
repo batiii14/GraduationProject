@@ -14,5 +14,6 @@ namespace Business.Abstract
         void Update(Message message);
         List<Message> GetAll();
         Message GetById(int id);
+        List<Message> GetAllMessagesByStudentId(int studentId);
     }
 }

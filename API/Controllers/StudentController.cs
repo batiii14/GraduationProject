@@ -26,14 +26,14 @@ namespace API.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var students = _studentService.GetAll();    
+            var students = _studentService.GetAll();
             return Ok(students);
         }
 
         [HttpDelete("delete")]
         public IActionResult Delete(int id)
         {
-            var studentToDelete= _studentService.GetById(id);
+            var studentToDelete = _studentService.GetById(id);
             _studentService.Delete(id);
             return Ok(studentToDelete);
         }
@@ -44,6 +44,14 @@ namespace API.Controllers
             var studentToUpdate = _studentService.GetById(id);
 
             return Ok(studentToUpdate);
+        }
+
+        [HttpGet("VievStudentProfileInfo")]
+        public IActionResult GetStudentProfileInfo(int id)
+        {
+            var student=_studentService.GetById(id);
+            return Ok(student);
+
         }
     }
 }
