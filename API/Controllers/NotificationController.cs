@@ -45,5 +45,13 @@ namespace API.Controllers
             var notToUpdate = _notificationService.GetById(id);
             return Ok(notToUpdate);
         }
+
+
+        [HttpGet("getAllNotificationByStudentId")]
+        public IActionResult GetAllNotificationByStudentId(int studentId)
+        {
+            var notifications = _notificationService.GetNotificationByStudentId(studentId);
+            return Ok(notifications);
+        }
     }
 }

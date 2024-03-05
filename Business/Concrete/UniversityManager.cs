@@ -39,9 +39,25 @@ namespace Business.Concrete
 
         }
 
-        public void Update(University university)
+        public void Update(int id,
+                     string name = null,
+                     string address = null,
+                     DateTime? createdAt = null,
+                     DateTime? updatedAt = null)
         {
-            throw new NotImplementedException();
+            var universityToUpdate = _universityDal.Get(p=>p.UniversityId==id);
+
+            if (name != null)
+                universityToUpdate.Name = name;
+            if (address != null)
+                universityToUpdate.Address = address;
+            if (createdAt != null)
+                universityToUpdate.CreatedAt = createdAt.Value;
+            if (updatedAt != null)
+                universityToUpdate.UpdatedAt = updatedAt.Value;
+
+            _universityDal.Update(universityToUpdate);
         }
+
     }
 }

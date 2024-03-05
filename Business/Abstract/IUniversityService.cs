@@ -11,7 +11,11 @@ namespace Business.Abstract
     {
         void Add(University university);
         void Delete(int id);
-        void Update(University university);
+        void Update(int id,
+                     string name = null,
+                     string address = null,
+                     DateTime? createdAt = null,
+                     DateTime? updatedAt = null);
         List<University> GetAll();
         University GetById(int id);
     }

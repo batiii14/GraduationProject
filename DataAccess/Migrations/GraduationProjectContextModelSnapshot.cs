@@ -509,6 +509,26 @@ namespace DataAccess.Migrations
 
                     b.ToTable("Universities");
                 });
+
+            modelBuilder.Entity("Entities.Concrete.VerificationCode", b =>
+                {
+                    b.Property<int>("VerificationCodeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VerificationCodeId"));
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VerificationCodeForStudent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VerificationCodeId");
+
+                    b.ToTable("VerificationCodes");
+                });
 #pragma warning restore 612, 618
         }
     }

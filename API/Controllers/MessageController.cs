@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +12,12 @@ namespace API.Controllers
     public class MessageController : ControllerBase
     {
         IMessageService _messageService;
+        INotificationService   _notificationService;
 
-        public MessageController(IMessageService messageService)
+        public MessageController(IMessageService messageService, INotificationService notificationService)
         {
             _messageService = messageService;
+            _notificationService = notificationService;
         }
 
 
@@ -21,6 +25,16 @@ namespace API.Controllers
         public IActionResult Add(Message message)
         {
             _messageService.Add(message);
+            Notification notification = new Notification();
+            notification.SenderId = message.SenderId;
+            notification.RecieverId = message.ReciverId;
+            notification.Title = "New Message";
+            notification.CreatedAt = DateTime.Now;
+            notification.UpdatedAt = DateTime.Now;
+            notification.Description = "You've recieved new message";
+            notification.Seen = false;
+            notification.ImageUrl = "bilmemne.jpg";
+            _notificationService.Add(notification);
             return Ok(message);
         }
 

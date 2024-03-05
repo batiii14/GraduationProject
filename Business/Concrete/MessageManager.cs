@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,19 @@ namespace Business.Concrete
     public class MessageManager : IMessageService
     {
         private IMessageDal _messageDal;
+        
         public MessageManager(IMessageDal messageDal)
         {
             _messageDal = messageDal;
+            
+
         }
         public void Add(Message message)
         {
 
             _messageDal.Add(message);
+            
+
         }
 
         public void Delete(int id)

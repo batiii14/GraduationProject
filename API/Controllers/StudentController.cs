@@ -11,17 +11,21 @@ namespace API.Controllers
     {
         IStudentService _studentService;
         INotificationService _notificationService;
+        IEmailSenderService _emailSenderService;
 
-        public StudentController(IStudentService studentService, INotificationService notificationService)
+        public StudentController(IStudentService studentService, INotificationService notificationService, IEmailSenderService emailSenderService)
         {
             _studentService = studentService;
             _notificationService = notificationService;
+            _emailSenderService = emailSenderService;
         }
 
         [HttpPost("add")]
         public IActionResult Add(Student student)
         {
+            student.isEmailVerified = false;
             _studentService.Add(student);
+            _emailSenderService.SendEmailAsync(student.Email, "Email Verification Deneme", "Merhaba "+student.Name+" Doğrulama kodun burada: ",student.UserId);
             return Ok(student);
         }
 
@@ -41,10 +45,25 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int userId,
+                   string? studentNumber,
+                   string? department,
+                   string? gender,
+                   string? emergencyContactNo,
+                   string? name,
+                   string? surName,
+                   string? email,
+                   string? password,
+                   string? address,
+                   string? phoneNo,
+                   DateTime? dob,
+                   DateTime? createdAt,
+                   DateTime? updatedAt,
+                   string? profileUrl)
         {
-            var studentToUpdate = _studentService.GetById(id);
-
+            var studentToUpdate = _studentService.GetById(userId);
+            _studentService.Update(userId,studentNumber,department,gender,emergencyContactNo,name,surName,email,password,address,phoneNo,dob,createdAt,updatedAt,profileUrl);
+            studentToUpdate = _studentService.GetById(userId);
             return Ok(studentToUpdate);
         }
 

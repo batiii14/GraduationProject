@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class fdsafds : Migration
+    public partial class enyennnii : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -251,6 +251,20 @@ namespace DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Universities", x => x.UniversityId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "VerificationCodes",
+                columns: table => new
+                {
+                    VerificationCodeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    VerificationCodeForStudent = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VerificationCodes", x => x.VerificationCodeId);
+                });
         }
 
         /// <inheritdoc />
@@ -291,6 +305,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Universities");
+
+            migrationBuilder.DropTable(
+                name: "VerificationCodes");
         }
     }
 }

@@ -53,6 +53,10 @@ builder.Services.AddScoped<IUniversityDal,UniversityDal>();
 builder.Services.AddScoped<ILoginService, LoginManager>();
 builder.Services.AddScoped<ILoginDal,LoginDal>();
 
+builder.Services.AddScoped<IVerificationCodeService,VerificationCodeManager>();
+builder.Services.AddScoped<IVerificationCodeDal,VerificationCodeDal>();
+
+builder.Services.AddTransient<IEmailSenderService, EmailSenderManager>();
 
 builder.Services.AddCors(opt => opt.AddDefaultPolicy(p => { p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); }));
 

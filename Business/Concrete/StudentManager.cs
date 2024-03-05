@@ -39,9 +39,62 @@ namespace Business.Concrete
 
         }
 
-        public void Update(Student student)
+        public void Update(int userId,
+                   string studentNumber = null,
+                   string department = null,
+                   string gender = null,
+                   string emergencyContactNo = null,
+                   string name = null,
+                   string surName = null,
+                   string email = null,
+                   string password = null,
+                   string address = null,
+                   string phoneNo = null,
+                   DateTime? dob = null,
+                   DateTime? createdAt = null,
+                   DateTime? updatedAt = null,
+                   string profileUrl = null)
         {
-            throw new NotImplementedException();
+            var studentToUpdate = _studentDal.Get(p=>p.UserId==userId);
+
+            if (studentToUpdate == null)
+            {
+                throw new Exception("Student not found"); // Handle the case where student is not found
+            }
+
+            // Update only the properties that are provided
+            if (studentNumber != null)
+                studentToUpdate.StudentNumber = studentNumber;
+            if (department != null)
+                studentToUpdate.Department = department;
+            if (gender != null)
+                studentToUpdate.Gender = gender;
+            if (emergencyContactNo != null)
+                studentToUpdate.EmergencyContactNo = emergencyContactNo;
+            if (name != null)
+                studentToUpdate.Name = name;
+            if (surName != null)
+                studentToUpdate.SurName = surName;
+            if (email != null)
+                studentToUpdate.Email = email;
+            if (password != null)
+                studentToUpdate.Password = password;
+            if (address != null)
+                studentToUpdate.Address = address;
+            if (phoneNo != null)
+                studentToUpdate.PhoneNo = phoneNo;
+            
+            if (dob != null)
+                studentToUpdate.Dob = dob.Value;
+            if (createdAt != null)
+                studentToUpdate.CreatedAt = createdAt.Value;
+            if (updatedAt != null)
+                studentToUpdate.UpdatedAt = updatedAt.Value;
+            if (profileUrl != null)
+                studentToUpdate.ProfileUrl = profileUrl;
+
+            _studentDal.Update(studentToUpdate);
         }
+
     }
 }

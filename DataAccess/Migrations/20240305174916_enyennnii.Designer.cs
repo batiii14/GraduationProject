@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GraduationProjectContext))]
-    [Migration("20240227161833_fdsafds")]
-    partial class fdsafds
+    [Migration("20240305174916_enyennnii")]
+    partial class enyennnii
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -511,6 +511,26 @@ namespace DataAccess.Migrations
                     b.HasKey("UniversityId");
 
                     b.ToTable("Universities");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.VerificationCode", b =>
+                {
+                    b.Property<int>("VerificationCodeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VerificationCodeId"));
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VerificationCodeForStudent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VerificationCodeId");
+
+                    b.ToTable("VerificationCodes");
                 });
 #pragma warning restore 612, 618
         }
