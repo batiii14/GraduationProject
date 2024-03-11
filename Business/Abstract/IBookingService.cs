@@ -11,7 +11,7 @@ namespace Business.Abstract
     {
         void Add(Booking booking);
         void Delete(int id);
-        void Update(Booking booking);
+        void Update(int BookingId,int UserId,int DormitoryId,int RoomId,String Status,DateTime CreatedAt,DateTime UpdatedAt);
         List<Booking> GetAll();
         Booking GetById(int id);
     }

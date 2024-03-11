@@ -40,9 +40,11 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int CommentId, int DormitoryId, String CommentContent, int UserId, DateTime CreatedAt, DateTime UpdatedAt)
         {
-            var commentToUpdate = _commentService.GetById(id);
+            var commentToUpdate = _commentService.GetById(CommentId);
+            _commentService.Update(CommentId,DormitoryId,CommentContent, UserId, CreatedAt, UpdatedAt);
+            commentToUpdate=_commentService.GetById(CommentId);
             return Ok(commentToUpdate);
         }
     }

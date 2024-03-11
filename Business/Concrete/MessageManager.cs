@@ -50,9 +50,28 @@ namespace Business.Concrete
             return _messageDal.GetList().Where(p => p.ReciverId == studentId).ToList();
         }
 
-        public void Update(Message message)
+        public void Update(int MessageId,
+                          int SenderId,
+                          int ReciverId,
+                          String? MessageContent = null,
+                          DateTime? CreatedAt = null,
+                          DateTime? UpdatedAt = null)
         {
-            throw new NotImplementedException();
+            var messageToUpdate = _messageDal.Get(m => m.MessageId == MessageId);
+
+            
+                messageToUpdate.SenderId = SenderId;
+           
+                messageToUpdate.ReciverId = ReciverId;
+            if (MessageContent != null)
+                messageToUpdate.MessageContent = MessageContent;
+            if (CreatedAt != null)
+                messageToUpdate.CreatedAt = CreatedAt.Value;
+            if (UpdatedAt != null)
+                messageToUpdate.UpdatedAt = UpdatedAt.Value;
+
+            _messageDal.Update(messageToUpdate);
         }
+
     }
 }

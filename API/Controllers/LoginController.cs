@@ -9,6 +9,7 @@ namespace API.Controllers
     public class LoginController : ControllerBase
     {
         ILoginService _loginService;
+        
 
         public LoginController(ILoginService loginService)
         {
@@ -23,5 +24,7 @@ namespace API.Controllers
 
             return Ok(result);
         }
+
+        
     }
 }

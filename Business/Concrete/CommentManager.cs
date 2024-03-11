@@ -38,9 +38,28 @@ namespace Business.Concrete
             return  _commentDal.Get(p => p.CommentId == id);
         }
 
-        public void Update(Comment comment)
+        public void Update(int CommentId,
+                           int DormitoryId,
+                           String CommentContent,
+                           int UserId,
+                           DateTime CreatedAt,
+                           DateTime UpdatedAt)
         {
-            throw new NotImplementedException();
+            var commentToUpdate = _commentDal.Get(c => c.CommentId == CommentId);
+
+            if (DormitoryId != null)
+                commentToUpdate.DormitoryId = DormitoryId;
+            if (CommentContent != null)
+                commentToUpdate.CommentContent = CommentContent;
+            if (UserId != null)
+                commentToUpdate.UserId = UserId;
+            if (CreatedAt != null)
+                commentToUpdate.CreatedAt = CreatedAt;
+            if (UpdatedAt != null)
+                commentToUpdate.UpdatedAt = UpdatedAt;
+
+            _commentDal.Update(commentToUpdate);
         }
+
     }
 }

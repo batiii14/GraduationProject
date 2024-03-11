@@ -54,10 +54,11 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int MessageId, int SenderId, int ReciverId, String? MessageContent, DateTime? CreatedAt, DateTime? UpdatedAt)
         {
-            var messageToUpdate = _messageService.GetById(id);
-
+            var messageToUpdate = _messageService.GetById(MessageId);
+            _messageService.Update(MessageId,SenderId,ReciverId,MessageContent,CreatedAt,UpdatedAt);
+            messageToUpdate = _messageService.GetById(MessageId);
             return Ok(messageToUpdate);
         }
 

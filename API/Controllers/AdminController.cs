@@ -1,7 +1,5 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -43,10 +41,11 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int UserId, String Name, String Email, String Password, String Address, String PhoneNo, DateTime CreatedAt, DateTime UpdatedAt, DateTime Dob, String ProfileUrl)
         {
-            var adminToUpdate = _adminService.GetById(id);
-
+            var adminToUpdate = _adminService.GetById(UserId);
+            _adminService.Update(UserId, Name, Email, Password, Address, PhoneNo, CreatedAt, UpdatedAt, Dob, ProfileUrl);
+            adminToUpdate=_adminService.GetById(UserId);
             return Ok(adminToUpdate);
         }
     }

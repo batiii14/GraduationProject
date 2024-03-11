@@ -1,11 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -23,27 +19,51 @@ namespace Business.Concrete
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var toDelete = _verificationCodeDal.Get(p => p.StudentId == id);
+            _verificationCodeDal.Delete(toDelete);
         }
 
         public List<VerificationCode> GetAll()
         {
-            throw new NotImplementedException();
+            return _verificationCodeDal.GetList().ToList();
         }
 
         public List<VerificationCode> GetAllByStudentId(int id)
         {
-            throw new NotImplementedException();
+            var list = _verificationCodeDal.GetList().Where(p => p.StudentId == id).ToList();
+            return list;
         }
 
-        public Admin GetById(int id)
+
+        public VerificationCode GetById(int id)
         {
-            throw new NotImplementedException();
+            var verificationCode = _verificationCodeDal.Get(p => p.StudentId == id);
+            return verificationCode;
         }
 
         public void Update(VerificationCode verificationCode)
         {
-            throw new NotImplementedException();
+            _verificationCodeDal.Update(verificationCode);
+        }
+
+        public Boolean verifyUser(VerificationCode verificationCode)
+        {
+            var isVerified = false;
+            IStudentDal _studentDal = new StudentDal();
+
+            var studentToUpdate = _studentDal.Get(p => p.UserId == verificationCode.StudentId);
+            var verificationList = _verificationCodeDal.GetList();
+            foreach (var vCode in verificationList)
+            {
+                if (vCode.StudentId == verificationCode.StudentId && vCode.VerificationCodeForStudent == verificationCode.VerificationCodeForStudent)
+                {
+                    studentToUpdate.isEmailVerified = true;
+                    _studentDal.Update(studentToUpdate);
+                    isVerified = true;
+                }
+            }
+
+            return isVerified;
         }
     }
 }

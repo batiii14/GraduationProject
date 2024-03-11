@@ -11,7 +11,12 @@ namespace Business.Abstract
     {
         void Add(Room room);
         void Delete(int id);
-        void Update(Room room);
+        public void Update(int roomId,
+                       int dormitoryId,
+                       String roomType,
+                       double? price,
+                       DateTime? createdAt,
+                       DateTime? updatedAt);
         List<Room> GetAll();
         Room GetById(int id);
     }

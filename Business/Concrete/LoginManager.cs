@@ -20,20 +20,22 @@ namespace Business.Concrete
             _adminDal = adminDal;
             _dormitoryOwnerDal = dormitoryOwnerDal;
             _studentDal = studentDal;
-            
+
         }
         public IEntity Login(string username, string password)
         {
             var admins = _adminDal.GetList().ToList();
             var dormOwners = _dormitoryOwnerDal.GetList().ToList();
             var students = _studentDal.GetList().ToList();
-             password = PasswordHasher.HashPassword(password);
+            password = PasswordHasher.HashPassword(password);
             IEntity userToLogin = null;
 
             foreach (var item in students)
             {
-                if (item.Name == username && item.Password == password)
+                var itemPassword = PasswordHasher.HashPassword(item.Password);
+                if (item.Name == username && itemPassword == password)
                 {
+
                     userToLogin = item;
                     break; // Kullanıcı bulunduğunda döngüden çık
                 }
@@ -43,6 +45,7 @@ namespace Business.Concrete
             {
                 foreach (var item in admins)
                 {
+                    var itemPassword = PasswordHasher.HashPassword(item.Password);
                     if (item.Name == username && item.Password == password)
                     {
                         userToLogin = item;
@@ -52,6 +55,7 @@ namespace Business.Concrete
 
                 foreach (var item in dormOwners)
                 {
+                    var itemPassword = PasswordHasher.HashPassword(item.Password);
                     if (item.Name == username && item.Password == password)
                     {
                         userToLogin = item;
@@ -62,7 +66,7 @@ namespace Business.Concrete
 
             if (userToLogin == null)
             {
-                throw new Exception("Kullanıcı bulunamadı."); 
+                throw new Exception("Kullanıcı bulunamadı.");
             }
 
             return userToLogin;

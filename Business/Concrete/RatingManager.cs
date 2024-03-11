@@ -40,9 +40,25 @@ namespace Business.Concrete
 
         }
 
-        public void Update(Rating rating)
+        public void Update(int ratingId,
+                         int dormitoryId,
+                         int userId,
+                         DateTime? createdAt = null,
+                         DateTime? updatedAt = null)
         {
-            throw new NotImplementedException();
+            var ratingToUpdate = _ratingDal.Get(p => p.RatingId == ratingId);
+
+            if (dormitoryId != null)
+                ratingToUpdate.DormitoryId = dormitoryId;
+            if (userId != null)
+                ratingToUpdate.UserId = userId;
+            if (createdAt != null)
+                ratingToUpdate.CreatedAt = createdAt.Value;
+            if (updatedAt != null)
+                ratingToUpdate.UpdatedAt = updatedAt.Value;
+
+            _ratingDal.Update(ratingToUpdate);
         }
+
     }
 }

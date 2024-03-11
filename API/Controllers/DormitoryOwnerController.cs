@@ -39,9 +39,12 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int UserId, int DormitoryId, String Name, String SurName, String Email, String Password, String Address, String PhoneNo, DateTime CreatedAt, DateTime UpdatedAt, DateTime Dob, String ProfileUrl)
         {
-            var dormitoryOwnerToUpdate = _dormitoryOwnerService.GetById(id);
+
+            var dormitoryOwnerToUpdate = _dormitoryOwnerService.GetById(UserId);
+            _dormitoryOwnerService.Update(UserId, DormitoryId, Name, SurName, Email, Password, Address, PhoneNo, CreatedAt, UpdatedAt, Dob, ProfileUrl);
+            dormitoryOwnerToUpdate = _dormitoryOwnerService.GetById(UserId);
             return Ok(dormitoryOwnerToUpdate);
         }
     }

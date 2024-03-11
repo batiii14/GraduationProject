@@ -40,9 +40,31 @@ namespace Business.Concrete
             return booking;
         }
 
-        public void Update(Booking booking)
+        public void Update(int BookingId,
+                          int UserId,
+                          int DormitoryId,
+                          int RoomId,
+                          String Status,
+                          DateTime CreatedAt,
+                          DateTime UpdatedAt)
         {
-            throw new NotImplementedException();
+            var bookingToUpdate = _bookingDal.Get(b => b.BookingId == BookingId);
+
+            if (UserId != null)
+                bookingToUpdate.UserId = UserId;
+            if (DormitoryId != null)
+                bookingToUpdate.DormitoryId = DormitoryId;
+            if (RoomId != null)
+                bookingToUpdate.RoomId = RoomId;
+            if (Status != null)
+                bookingToUpdate.Status = Status;
+            if (CreatedAt != null)
+                bookingToUpdate.CreatedAt = CreatedAt;
+            if (UpdatedAt != null)
+                bookingToUpdate.UpdatedAt = UpdatedAt;
+
+            _bookingDal.Update(bookingToUpdate);
         }
+
     }
 }

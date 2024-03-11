@@ -40,9 +40,46 @@ namespace Business.Concrete
 
         }
 
-        public void Update(DormitoryOwner dormitoryOwner)
+        public void Update(int UserId,
+                       int DormitoryId,
+                       String Name,
+                       String SurName,
+                       String Email,
+                       String Password,
+                       String Address,
+                       String PhoneNo,
+                       DateTime CreatedAt,
+                       DateTime UpdatedAt,
+                       DateTime Dob,
+                       String ProfileUrl)
         {
-            throw new NotImplementedException();
+            var userToUpdate = _dormitoryOwnerDal.Get(u => u.UserId == UserId);
+
+            if (DormitoryId != null)
+                userToUpdate.DormitoryId = DormitoryId;
+            if (Name != null)
+                userToUpdate.Name = Name;
+            if (SurName != null)
+                userToUpdate.SurName = SurName;
+            if (Email != null)
+                userToUpdate.Email = Email;
+            if (Password != null)
+                userToUpdate.Password = Password;
+            if (Address != null)
+                userToUpdate.Address = Address;
+            if (PhoneNo != null)
+                userToUpdate.PhoneNo = PhoneNo;
+            if (CreatedAt != null)
+                userToUpdate.CreatedAt = CreatedAt;
+            if (UpdatedAt != null)
+                userToUpdate.UpdatedAt = UpdatedAt;
+            if (Dob != null)
+                userToUpdate.Dob = Dob;
+            if (ProfileUrl != null)
+                userToUpdate.ProfileUrl = ProfileUrl;
+
+            _dormitoryOwnerDal.Update(userToUpdate);
         }
+
     }
 }

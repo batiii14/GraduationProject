@@ -42,10 +42,11 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Put(int ratingId, int dormitoryId, int userId, DateTime? createdAt, DateTime? updatedAt)
         {
-            var ratingToUpdate = _ratingService.GetById(id);
-
+            var ratingToUpdate = _ratingService.GetById(ratingId);
+            _ratingService.Update(ratingId,dormitoryId,userId, createdAt, updatedAt);
+            ratingToUpdate=_ratingService.GetById(ratingId);
             return Ok(ratingToUpdate);
         }
 

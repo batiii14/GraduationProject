@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -38,9 +39,62 @@ namespace Business.Concrete
             return _dormitoryDetailDal.Get(p => p.DetailId == id);
         }
 
-        public void Update(DormitoryDetail dormitoryDetail)
+        public void Update(int DetailId,
+                                   int DormitoryId,
+                                   String ContactNo,
+                                   String Email,
+                                   String FaxNo,
+                                   String Address,
+                                   int Capacity,
+                                   String Description,
+                                   String InternetSpeed,
+                                   bool HasKitchen,
+                                   bool HasCleanService,
+                                   bool HasShowerAndToilet,
+                                   bool HasBalcony,
+                                   bool HasTv,
+                                   bool HasMicrowave,
+                                   bool HasAirConditioning,
+                                   List<String> PhotoUrls,
+                                   DateTime CreatedAt,
+                                   DateTime UpdatedAt)
         {
-            throw new NotImplementedException();
+            var dormitoryDetailsToUpdate = _dormitoryDetailDal.Get(d => d.DetailId == DetailId);
+
+            if (DormitoryId != null)
+                dormitoryDetailsToUpdate.DormitoryId = DormitoryId;
+            if (ContactNo != null)
+                dormitoryDetailsToUpdate.ContactNo = ContactNo;
+            if (Email != null)
+                dormitoryDetailsToUpdate.Email = Email;
+            if (FaxNo != null)
+                dormitoryDetailsToUpdate.FaxNo = FaxNo;
+            if (Address != null)
+                dormitoryDetailsToUpdate.Address = Address;
+            if (Capacity != null)
+                dormitoryDetailsToUpdate.Capacity = Capacity;
+            if (Description != null)
+                dormitoryDetailsToUpdate.Description = Description;
+            if (InternetSpeed != null)
+                dormitoryDetailsToUpdate.InternetSpeed = InternetSpeed;
+
+            dormitoryDetailsToUpdate.HasKitchen = HasKitchen;
+            dormitoryDetailsToUpdate.HasCleanService = HasCleanService;
+            dormitoryDetailsToUpdate.HasShowerAndToilet = HasShowerAndToilet;
+            dormitoryDetailsToUpdate.HasBalcony = HasBalcony;
+            dormitoryDetailsToUpdate.HasTv = HasTv;
+            dormitoryDetailsToUpdate.HasMicrowave = HasMicrowave;
+            dormitoryDetailsToUpdate.HasAirConditioning = HasAirConditioning;
+
+            if (PhotoUrls != null)
+                dormitoryDetailsToUpdate.PhotoUrls = PhotoUrls;
+            if (CreatedAt != null)
+                dormitoryDetailsToUpdate.CreatedAt = CreatedAt;
+            if (UpdatedAt != null)
+                dormitoryDetailsToUpdate.UpdatedAt = UpdatedAt;
+
+            _dormitoryDetailDal.Update(dormitoryDetailsToUpdate);
         }
+
     }
 }
