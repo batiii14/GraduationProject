@@ -45,5 +45,13 @@ namespace API.Controllers
             var commentToUpdate = _commentService.GetById(id);
             return Ok(commentToUpdate);
         }
+
+        [HttpGet("getCommentById")]
+        public IActionResult Get(int id)
+        {
+
+            var comment = _commentService.GetById(id);
+            return Ok(comment);
+        }
     }
 }

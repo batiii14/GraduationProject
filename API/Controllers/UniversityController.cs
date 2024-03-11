@@ -65,5 +65,13 @@ namespace API.Controllers
             university = _universityService.GetById(id);
             return Ok(university);
         }
+
+        [HttpGet("getUniversityById")]
+        public IActionResult Get(int id)
+        {
+
+            var university = _universityService.GetById(id);
+            return Ok(university);
+        }
     }
 }

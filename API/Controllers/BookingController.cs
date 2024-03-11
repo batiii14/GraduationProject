@@ -65,5 +65,13 @@ namespace API.Controllers
             bookingToUpdate.UpdatedAt = DateTime.Now;
             return Ok(bookingToUpdate);
         }
+
+        [HttpGet("getBookingById")]
+        public IActionResult Get(int id)
+        {
+
+            var booking = _bookingService.GetById(id);
+            return Ok(booking);
+        }
     }
 }

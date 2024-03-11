@@ -44,5 +44,13 @@ namespace API.Controllers
             var dormDetailToUpdate = _dormitoryDetailService.GetById(id);
             return Ok(dormDetailToUpdate);
         }
+
+        [HttpGet("getDormitoryDetailById")]
+        public IActionResult Get(int id)
+        {
+
+            var dormitoryDetail = _dormitoryDetailService.GetById(id);
+            return Ok(dormitoryDetail);
+        }
     }
 }

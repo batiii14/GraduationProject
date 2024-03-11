@@ -67,5 +67,13 @@ namespace API.Controllers
             var messages=_messageService.GetAllMessagesByStudentId(studentId);
             return Ok(messages);
         }
+
+        [HttpGet("getMessageById")]
+        public IActionResult Get(int id)
+        {
+
+            var message = _messageService.GetById(id);
+            return Ok(message);
+        }
     }
 }

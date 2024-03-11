@@ -81,5 +81,13 @@ namespace API.Controllers
             var notification = _notificationService.GetNotificationByStudentId(studentId);
             return Ok(notification);
         }
+
+        [HttpGet("getStudentById")]
+        public IActionResult Get(int id)
+        {
+
+            var student = _studentService.GetById(id);
+            return Ok(student);
+        }
     }
 }

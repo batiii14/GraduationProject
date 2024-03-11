@@ -65,5 +65,12 @@ namespace API.Controllers
             return Ok(rating);
         }
 
+        [HttpGet("getRatingById")]
+        public IActionResult Get(int id)
+        {
+
+            var rating = _ratingService.GetById(id);
+            return Ok(rating);
+        }
     }
 }
