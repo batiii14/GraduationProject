@@ -14,5 +14,6 @@ namespace Business.Abstract
         void Update(DormitoryOwner dormitoryOwner);
         List<DormitoryOwner> GetAll();
         DormitoryOwner GetById(int id);
+        DormitoryOwner GetDormitoryOwnerByName(string name);
     }
 }

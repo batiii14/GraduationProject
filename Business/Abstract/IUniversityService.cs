@@ -18,5 +18,7 @@ namespace Business.Abstract
                      DateTime? updatedAt = null);
         List<University> GetAll();
         University GetById(int id);
+
+        University GetUniversityByName(string name);
     }
 }

@@ -57,5 +57,13 @@ namespace API.Controllers
             var admin = _adminService.GetById(id);
             return Ok(admin);
         }
+
+        [HttpGet("getAdminByName")]
+        public IActionResult Get(string name)
+        {
+
+            var admin = _adminService.GetAdminByName(name);
+            return Ok(admin);
+        }
     }
 }

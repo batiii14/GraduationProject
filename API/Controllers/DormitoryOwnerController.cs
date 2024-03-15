@@ -56,5 +56,14 @@ namespace API.Controllers
             var dormitoryOwner = _dormitoryOwnerService.GetById(id);
             return Ok(dormitoryOwner);
         }
+
+
+        [HttpGet("getDormitoryOwnerByName")]
+        public IActionResult Get(string name)
+        {
+
+            var dormitoryOwner = _dormitoryOwnerService.GetDormitoryOwnerByName(name);
+            return Ok(dormitoryOwner);
+        }
     }
 }

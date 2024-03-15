@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,13 @@ namespace Business.Concrete
         public void Update(DormitoryOwner dormitoryOwner)
         {
             throw new NotImplementedException();
+        }
+
+        public DormitoryOwner GetDormitoryOwnerByName(string name)
+        {
+            var dormitoryOwner = _dormitoryOwnerDal.Get(p => p.Name.ToLower() == name.ToLower());
+
+            return dormitoryOwner;
         }
     }
 }

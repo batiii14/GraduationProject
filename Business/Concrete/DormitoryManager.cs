@@ -43,5 +43,12 @@ namespace Business.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public Dormitory GetDormitoryByName(string name)
+        {
+            var dormitory = _dormitoryDal.Get(p => p.Name.ToLower() == name.ToLower());
+
+            return dormitory;
+        }
     }
 }

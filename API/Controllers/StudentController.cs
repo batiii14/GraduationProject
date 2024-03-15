@@ -93,5 +93,13 @@ namespace API.Controllers
             var student = _studentService.GetById(id);
             return Ok(student);
         }
+
+        [HttpGet("getStudentByName")]
+        public IActionResult Get(string name)
+        {
+
+            var student = _studentService.GetStudentByName(name);
+            return Ok(student);
+        }
     }
 }

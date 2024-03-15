@@ -29,5 +29,6 @@ namespace Business.Abstract
                    string profileUrl);
         List<Student> GetAll();
         Student GetById(int id);
+        Student GetStudentByName(string name);
     }
 }

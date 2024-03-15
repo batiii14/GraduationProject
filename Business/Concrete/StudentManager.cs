@@ -96,5 +96,13 @@ namespace Business.Concrete
             _studentDal.Update(studentToUpdate);
         }
 
+
+        public Student GetStudentByName(string name)
+        {
+            var student=_studentDal.Get(p=>p.Name.ToLower() == name.ToLower());
+
+            return student;
+        }
+
     }
 }

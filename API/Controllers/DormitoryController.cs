@@ -28,14 +28,14 @@ namespace API.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var dormitories=_dormitoryService.GetAll();
+            var dormitories = _dormitoryService.GetAll();
             return Ok(dormitories);
         }
 
         [HttpDelete("delete")]
         public IActionResult Delete(int id)
         {
-            var dormitoryToDelete=_dormitoryService.GetById(id);
+            var dormitoryToDelete = _dormitoryService.GetById(id);
             _dormitoryService.Delete(id);
             return Ok(dormitoryToDelete);
         }
@@ -54,6 +54,15 @@ namespace API.Controllers
         {
 
             var dormitory = _dormitoryService.GetById(id);
+            return Ok(dormitory);
+        }
+
+
+        [HttpGet("getDormitoryByName")]
+        public IActionResult Get(string name)
+        {
+
+            var dormitory = _dormitoryService.GetDormitoryByName(name);
             return Ok(dormitory);
         }
     }

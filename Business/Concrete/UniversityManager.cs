@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public void Delete(int id)
         {
-            var universityToDelete=_universityDal.Get(p=>p.UniversityId == id);
+            var universityToDelete = _universityDal.Get(p => p.UniversityId == id);
             _universityDal.Delete(universityToDelete);
         }
 
@@ -45,7 +45,7 @@ namespace Business.Concrete
                      DateTime? createdAt = null,
                      DateTime? updatedAt = null)
         {
-            var universityToUpdate = _universityDal.Get(p=>p.UniversityId==id);
+            var universityToUpdate = _universityDal.Get(p => p.UniversityId == id);
 
             if (name != null)
                 universityToUpdate.Name = name;
@@ -57,6 +57,14 @@ namespace Business.Concrete
                 universityToUpdate.UpdatedAt = updatedAt.Value;
 
             _universityDal.Update(universityToUpdate);
+        }
+
+
+        public University GetUniversityByName(string name)
+        {
+             var university=_universityDal.Get(p=>p.Name.ToLower() == name.ToLower());
+
+            return university;
         }
 
     }

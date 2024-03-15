@@ -83,5 +83,12 @@ namespace Business.Concrete
             _adminDal.Update(adminToUpdate);
         }
 
+
+        public Admin GetAdminByName(string AdminName)
+        {
+            var admin=_adminDal.Get(p=>p.Name.ToLower() == AdminName.ToLower());
+            return admin;
+        }
+
     }
 }
