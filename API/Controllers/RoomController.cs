@@ -20,6 +20,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Room room)
         {
+            room.CreatedAt = DateTime.Now;
+            room.UpdatedAt = DateTime.Now;
             _roomService.Add(room);
             return Ok(room);
         }
@@ -43,6 +45,7 @@ namespace API.Controllers
         public IActionResult Put(int id)
         {
             var roomToUpdate = _roomService.GetById(id);
+            roomToUpdate.UpdatedAt = DateTime.Now;
 
             return Ok(roomToUpdate);
         }

@@ -22,6 +22,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Rating rating)
         {
+            rating.CreatedAt = DateTime.Now;
+            rating.UpdatedAt = DateTime.Now;
             _ratingService.Add(rating);
             return Ok(rating);
         }
@@ -36,7 +38,7 @@ namespace API.Controllers
         [HttpDelete("delete")]
         public IActionResult Delete(int id)
         {
-            var ratingToDelete=_ratingService.GetById(id);
+            var ratingToDelete = _ratingService.GetById(id);
             _ratingService.Delete(id);
             return Ok(ratingToDelete);
         }
@@ -45,6 +47,7 @@ namespace API.Controllers
         public IActionResult Put(int id)
         {
             var ratingToUpdate = _ratingService.GetById(id);
+            ratingToUpdate.UpdatedAt = DateTime.Now;
 
             return Ok(ratingToUpdate);
         }

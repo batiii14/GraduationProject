@@ -20,6 +20,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Comment comment)
         {
+            comment.CreatedAt = DateTime.Now;
+            comment.UpdatedAt = DateTime.Now;
             _commentService.Add(comment);
             return Ok(comment);
         }
@@ -43,6 +45,7 @@ namespace API.Controllers
         public IActionResult Put(int id)
         {
             var commentToUpdate = _commentService.GetById(id);
+            commentToUpdate.UpdatedAt = DateTime.Now;
             return Ok(commentToUpdate);
         }
 

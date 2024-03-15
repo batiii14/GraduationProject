@@ -19,6 +19,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(DormitoryOwner dormitoryOwner)
         {
+            dormitoryOwner.CreatedAt = DateTime.Now;
+            dormitoryOwner.UpdatedAt = DateTime.Now;
             _dormitoryOwnerService.Add(dormitoryOwner); 
             return Ok(dormitoryOwner);
         }
@@ -42,6 +44,8 @@ namespace API.Controllers
         public IActionResult Put(int id)
         {
             var dormitoryOwnerToUpdate = _dormitoryOwnerService.GetById(id);
+            dormitoryOwnerToUpdate.UpdatedAt = DateTime.Now;
+
             return Ok(dormitoryOwnerToUpdate);
         }
 

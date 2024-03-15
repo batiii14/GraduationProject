@@ -24,6 +24,8 @@ namespace API.Controllers
         public IActionResult Add(Student student)
         {
             student.isEmailVerified = false;
+            student.CreatedAt = DateTime.Now;
+            student.UpdatedAt = DateTime.Now;
             _studentService.Add(student);
             _emailSenderService.SendEmailAsync(student.Email, "Email Verification Deneme", "Merhaba "+student.Name+" Doğrulama kodun burada: ",student.UserId);
             return Ok(student);
@@ -62,6 +64,8 @@ namespace API.Controllers
                    string? profileUrl)
         {
             var studentToUpdate = _studentService.GetById(userId);
+            studentToUpdate.UpdatedAt = DateTime.Now;
+
             _studentService.Update(userId,studentNumber,department,gender,emergencyContactNo,name,surName,email,password,address,phoneNo,dob,createdAt,updatedAt,profileUrl);
             studentToUpdate = _studentService.GetById(userId);
             return Ok(studentToUpdate);

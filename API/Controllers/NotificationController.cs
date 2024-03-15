@@ -20,6 +20,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Notification notification)
         {
+            notification.CreatedAt = DateTime.Now;
+            notification.UpdatedAt = DateTime.Now;
             _notificationService.Add(notification);
             return Ok(notification);
         }
@@ -43,6 +45,8 @@ namespace API.Controllers
         public IActionResult Put(int id)
         {
             var notToUpdate = _notificationService.GetById(id);
+            notToUpdate.UpdatedAt = DateTime.Now;
+
             return Ok(notToUpdate);
         }
 

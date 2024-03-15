@@ -35,6 +35,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Booking booking)
         {
+            booking.CreatedAt = DateTime.Now;
+            booking.UpdatedAt = DateTime.Now;
             _bookingService.Add(booking);
             return Ok(booking);
         }

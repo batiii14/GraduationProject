@@ -24,6 +24,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Message message)
         {
+            message.CreatedAt = DateTime.Now;
+            message.UpdatedAt = DateTime.Now;
             _messageService.Add(message);
             Notification notification = new Notification();
             notification.SenderId = message.SenderId;
@@ -57,6 +59,8 @@ namespace API.Controllers
         public IActionResult Put(int id)
         {
             var messageToUpdate = _messageService.GetById(id);
+            messageToUpdate.UpdatedAt = DateTime.Now;
+
 
             return Ok(messageToUpdate);
         }

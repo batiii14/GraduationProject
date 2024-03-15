@@ -46,6 +46,7 @@ namespace API.Controllers
             var adminToUpdate = _adminService.GetById(UserId);
             _adminService.Update(UserId, Name,SurName, Email, Password, Address, PhoneNo, CreatedAt, UpdatedAt, Dob, ProfileUrl);
             adminToUpdate=_adminService.GetById(UserId);
+            adminToUpdate.UpdatedAt= DateTime.Now;
             return Ok(adminToUpdate);
         }
 

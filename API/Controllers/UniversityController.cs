@@ -21,6 +21,8 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(University university)
         {
+            university.CreatedAt = DateTime.Now;
+            university.UpdatedAt = DateTime.Now;
             _universityService.Add(university);
             return Ok(university);
         }
@@ -56,10 +58,12 @@ namespace API.Controllers
                      DateTime? updatedAt)
         {
             var university = _universityService.GetById(id);
+
             if (university == null)
             {
                 return NotFound();
             }
+            university.UpdatedAt = DateTime.Now;
 
             _universityService.Update(id, name, address,createdAt,updatedAt);
             university = _universityService.GetById(id);
