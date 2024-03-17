@@ -11,7 +11,7 @@ namespace Business.Abstract
     {
         void Add(Rating rating);
         void Delete(int id);
-        void Update(Rating rating);
+        void Update(int ratingId, int dormitoryId, int userId,int ratingNo, DateTime? createdAt, DateTime? updatedAt);
         List<Rating> GetAll();
         Rating GetById(int id);
     }

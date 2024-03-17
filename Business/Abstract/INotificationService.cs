@@ -11,7 +11,7 @@ namespace Business.Abstract
     {
         void Add(Notification notification);
         void Delete(int id);
-        void Update(Notification notification);
+        void Update(int notificationId, int recieverId, int senderId, String title, string description, String imageUrl, DateTime? createdAt, DateTime? updatedAt);
         List<Notification> GetAll();
         Notification GetById(int id);
         Notification GetNotificationByStudentId(int studentId);

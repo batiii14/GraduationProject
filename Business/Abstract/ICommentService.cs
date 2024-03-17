@@ -11,7 +11,7 @@ namespace Business.Abstract
     {
         void Add(Comment comment);
         void Delete(int id);
-        void Update(Comment comment);
+        void Update(int CommentId, int DormitoryId, String CommentContent, int UserId, DateTime CreatedAt, DateTime UpdatedAt);
         List<Comment> GetAll();
         Comment GetById(int id);
     }

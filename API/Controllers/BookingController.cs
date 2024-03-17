@@ -59,11 +59,11 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id, int RoomId, String Status)
+        public IActionResult Update(int BookingId, int UserId, int DormitoryId, int RoomId, String Status, DateTime CreatedAt, DateTime UpdatedAt)
         {
-            var bookingToUpdate = _bookingService.GetById(id);
-            bookingToUpdate.Status = Status;
-            bookingToUpdate.RoomId = RoomId;
+            var bookingToUpdate = _bookingService.GetById(BookingId);
+            _bookingService.Update(BookingId, UserId,  DormitoryId,  RoomId, Status,  CreatedAt, UpdatedAt);
+            bookingToUpdate=_bookingService.GetById(BookingId);
             bookingToUpdate.UpdatedAt = DateTime.Now;
             return Ok(bookingToUpdate);
         }

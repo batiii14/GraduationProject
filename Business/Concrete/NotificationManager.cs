@@ -39,9 +39,34 @@ namespace Business.Concrete
 
         }
 
-        public void Update(Notification notification)
+        public void Update(int notificationId,
+                               int recieverId,
+                               int senderId,
+                               String title = null,
+                               String description = null,
+                               String imageUrl = null,
+                               DateTime? createdAt = null,
+                               DateTime? updatedAt = null
+                               )
         {
-            throw new NotImplementedException();
+            var notificationToUpdate = _notificationDal.Get(p => p.NotificationId == notificationId);
+
+            notificationToUpdate.RecieverId = recieverId;
+            notificationToUpdate.SenderId = senderId;
+            if (title != null)
+                notificationToUpdate.Title = title;
+            if (description != null)
+                notificationToUpdate.Description = description;
+            if (imageUrl != null)
+                notificationToUpdate.ImageUrl = imageUrl;
+            if (createdAt != null)
+                notificationToUpdate.CreatedAt = createdAt.Value;
+            if (updatedAt != null)
+                notificationToUpdate.UpdatedAt = updatedAt.Value;
+
+
+
+            _notificationDal.Update(notificationToUpdate);
         }
 
         public Notification GetNotificationByStudentId(int studentId)

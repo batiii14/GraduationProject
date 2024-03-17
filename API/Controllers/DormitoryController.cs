@@ -41,9 +41,11 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Update(int DormitoryId, String Name, int UniversityId, int Quota, DateTime CreatedAt, DateTime UpdatedAt)
         {
-            var dormitoryToUpdate = _dormitoryService.GetById(id);
+            var dormitoryToUpdate = _dormitoryService.GetById(DormitoryId);
+            _dormitoryService.Update(DormitoryId,Name,UniversityId,Quota,CreatedAt,UpdatedAt);
+            dormitoryToUpdate = _dormitoryService.GetById(DormitoryId);
             dormitoryToUpdate.UpdatedAt = DateTime.Now;
 
             return Ok(dormitoryToUpdate);

@@ -17,6 +17,7 @@ namespace Entities.Concrete
         public int DormitoryId { get; set; }
         [ForeignKey("User")]
         public int UserId { get; set; }
+        public int RatingNo { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         

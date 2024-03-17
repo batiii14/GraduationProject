@@ -39,9 +39,27 @@ namespace Business.Concrete
             
         }
 
-        public void Update(Dormitory dormitory)
+        public void Update(int DormitoryId,
+                            String Name,
+                            int UniversityId,
+                            int Quota,
+                            DateTime CreatedAt,
+                            DateTime UpdatedAt)
         {
-            throw new NotImplementedException();
+            var dormitoryToUpdate = _dormitoryDal.Get(d => d.DormitoryId == DormitoryId);
+
+            if (Name != null)
+                dormitoryToUpdate.Name = Name;
+            if (UniversityId != null)
+                dormitoryToUpdate.UniversityId = UniversityId;
+            if (Quota != null)
+                dormitoryToUpdate.Quota = Quota;
+            if (CreatedAt != null)
+                dormitoryToUpdate.CreatedAt = CreatedAt;
+            if (UpdatedAt != null)
+                dormitoryToUpdate.UpdatedAt = UpdatedAt;
+
+            _dormitoryDal.Update(dormitoryToUpdate);
         }
 
         public Dormitory GetDormitoryByName(string name)

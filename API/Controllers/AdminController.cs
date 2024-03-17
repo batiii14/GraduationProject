@@ -41,7 +41,7 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int UserId, String Name,String SurName, String Email, String Password, String Address, String PhoneNo, DateTime CreatedAt, DateTime UpdatedAt, DateTime Dob, String ProfileUrl)
+        public IActionResult Update(int UserId, String Name,String SurName, String Email, String Password, String Address, String PhoneNo, DateTime? CreatedAt, DateTime? UpdatedAt, DateTime? Dob, String ProfileUrl)
         {
             var adminToUpdate = _adminService.GetById(UserId);
             _adminService.Update(UserId, Name,SurName, Email, Password, Address, PhoneNo, CreatedAt, UpdatedAt, Dob, ProfileUrl);

@@ -42,9 +42,11 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Put(int id)
+        public IActionResult Update(int notificationId, int recieverId, int senderId, String title, string description, String imageUrl, DateTime? createdAt, DateTime? updatedAt)
         {
-            var notToUpdate = _notificationService.GetById(id);
+            var notToUpdate = _notificationService.GetById(notificationId);
+            _notificationService.Update(notificationId, recieverId, senderId, title, description, imageUrl, createdAt, updatedAt);
+            notToUpdate= _notificationService.GetById(notificationId);
             notToUpdate.UpdatedAt = DateTime.Now;
 
             return Ok(notToUpdate);

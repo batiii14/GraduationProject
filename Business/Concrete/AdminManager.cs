@@ -45,17 +45,7 @@ namespace Business.Concrete
             return admin;
         }
 
-        public void Update(int UserId,
-                       String Name,
-                       String SurName,
-                       String Email,
-                       String Password,
-                       String Address,
-                       String PhoneNo,
-                       DateTime CreatedAt,
-                       DateTime UpdatedAt,
-                       DateTime Dob,
-                       String ProfileUrl)
+        public void Update(int UserId, String Name = null, String SurName = null, String Email = null, String Password = null, String Address = null, String PhoneNo = null, DateTime? CreatedAt = null, DateTime? UpdatedAt = null, DateTime? Dob = null, String ProfileUrl = null)
         {
             var adminToUpdate = _adminDal.Get(u => u.UserId == UserId);
 
@@ -72,16 +62,18 @@ namespace Business.Concrete
             if (PhoneNo != null)
                 adminToUpdate.PhoneNo = PhoneNo;
             if (CreatedAt != null)
-                adminToUpdate.CreatedAt = CreatedAt;
+                adminToUpdate.CreatedAt = CreatedAt.Value;
             if (UpdatedAt != null)
-                adminToUpdate.UpdatedAt = UpdatedAt;
+                adminToUpdate.UpdatedAt = UpdatedAt.Value;
             if (Dob != null)
-                adminToUpdate.Dob = Dob;
+                adminToUpdate.Dob = Dob.Value;
             if (ProfileUrl != null)
                 adminToUpdate.ProfileUrl = ProfileUrl;
 
             _adminDal.Update(adminToUpdate);
         }
+
+
 
 
         public Admin GetAdminByName(string AdminName)
