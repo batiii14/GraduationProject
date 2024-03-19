@@ -88,5 +88,55 @@ namespace Business.Concrete
 
             return dormitoryOwner;
         }
+
+        public List<Booking> GetAllBookingsForSpecificDormitory(int dormId)
+        {
+            IBookingDal bookingDal=new BookingDal();
+            var bookingList=bookingDal.GetList().Where(p=>p.DormitoryId == dormId).ToList();
+            return bookingList;
+
+        }
+
+        public List<Booking> GetPendingBookingsForSpecificDormitory(int dormId)
+        {
+            IBookingDal bookingDal = new BookingDal();
+            var bookingList = bookingDal.GetList().Where(p => p.DormitoryId == dormId&&p.Status=="Pending").ToList();
+            return bookingList;
+
+        }
+
+        public Boolean ApproveStudentsBookingRequest(int bookingId)
+        {
+            var result = false;
+            try
+            {
+                IBookingDal bookingDal = new BookingDal();
+                var booking = bookingDal.Get(p => p.BookingId == bookingId);
+                booking.Status = "Approved";
+                booking.UpdatedAt = DateTime.Now;
+                bookingDal.Update(booking);
+                result = true;
+                Notification notification = new Notification();
+                notification.SenderId = booking.DormitoryId;
+                notification.RecieverId = booking.UserId;
+                notification.Title = "You have a new notification";
+                notification.UpdatedAt = DateTime.Now;
+                notification.CreatedAt = DateTime.Now;
+                notification.Seen = false;
+                notification.Description = "Your booking has been approved";
+                notification.ImageUrl = "asdasd";
+                NotificationDal notificationDal = new NotificationDal();
+                notificationDal.Add(notification);
+
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Something went wrong! We couldn't approve the booking request.");
+            }
+            return result;
+            
+
+        }
     }
 }

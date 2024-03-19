@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GraduationProjectContext))]
-    [Migration("20240315175341_init1231")]
-    partial class init1231
+    [Migration("20240318202504_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,9 +69,6 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("isEmailVerified")
-                        .HasColumnType("bit");
 
                     b.HasKey("UserId");
 
@@ -286,9 +283,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("isEmailVerified")
-                        .HasColumnType("bit");
-
                     b.HasKey("UserId");
 
                     b.ToTable("DormitoryOwners");
@@ -375,6 +369,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DormitoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingNo")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")

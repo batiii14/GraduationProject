@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,8 +36,13 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Booking booking)
         {
+            DormitoryOwnerDal dormitoryOwnerDal = new DormitoryOwnerDal();
+            var dormOwner=dormitoryOwnerDal.Get(p=>p.DormitoryId==booking.DormitoryId);
+            StudentDal studentDal = new StudentDal();
+            var student = studentDal.Get(p => p.UserId == booking.UserId);
             booking.CreatedAt = DateTime.Now;
             booking.UpdatedAt = DateTime.Now;
+            booking.Status = "Pending";
             _bookingService.Add(booking);
             return Ok(booking);
         }

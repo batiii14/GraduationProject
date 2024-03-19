@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class init1231 : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,7 +23,6 @@ namespace DataAccess.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isEmailVerified = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Dob = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -128,7 +127,6 @@ namespace DataAccess.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isEmailVerified = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Dob = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -184,6 +182,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DormitoryId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
+                    RatingNo = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

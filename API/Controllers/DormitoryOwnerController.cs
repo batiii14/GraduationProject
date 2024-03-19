@@ -61,11 +61,37 @@ namespace API.Controllers
 
 
         [HttpGet("getDormitoryOwnerByName")]
-        public IActionResult Get(string name)
+        public IActionResult getDormitoryOwnerByName(string name)
         {
 
             var dormitoryOwner = _dormitoryOwnerService.GetDormitoryOwnerByName(name);
             return Ok(dormitoryOwner);
+        }
+        
+        
+        [HttpGet("GetPendingBookingsForSpecificDormitory")]
+        public IActionResult GetPendingBookingsForSpecificDormitory(int dormId)
+        {
+
+            var varPendingList=  _dormitoryOwnerService.GetPendingBookingsForSpecificDormitory(dormId);
+            return Ok(varPendingList);
+        }
+        
+        
+        [HttpGet("GetAllBookingsForSpecificDormitory")]
+        public IActionResult GetAllBookingsForSpecificDormitory(int dormId)
+        {
+
+            var bookingList=  _dormitoryOwnerService.GetAllBookingsForSpecificDormitory(dormId);
+            return Ok(bookingList);
+        }
+
+        [HttpPut("ApproveStudentsBookingRequest")]
+        public IActionResult ApproveStudentsBookingRequest(int bookingId)
+        {
+
+            var result=_dormitoryOwnerService.ApproveStudentsBookingRequest(bookingId);
+            return Ok(result);
         }
     }
 }

@@ -15,5 +15,8 @@ namespace Business.Abstract
         List<DormitoryOwner> GetAll();
         DormitoryOwner GetById(int id);
         DormitoryOwner GetDormitoryOwnerByName(string name);
+        Boolean ApproveStudentsBookingRequest(int bookingId);
+        List<Booking> GetPendingBookingsForSpecificDormitory(int dormId);
+        List<Booking> GetAllBookingsForSpecificDormitory(int dormId);
     }
 }

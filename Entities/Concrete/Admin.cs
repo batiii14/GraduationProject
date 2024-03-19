@@ -18,7 +18,6 @@ namespace Entities.Concrete
         public String Password { get; set; }
         public String Address { get; set; }
         public String PhoneNo { get; set; }
-        public Boolean isEmailVerified { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime Dob { get; set; }
