@@ -51,11 +51,30 @@ namespace API.Controllers
             return Ok(dormDetailToUpdate);
         }
 
+
+        [HttpPut("updatePhotoUrls")]
+        public IActionResult UpdatePhotoUrls(int detailId, List<string> photoUrls)
+        {
+            
+
+            _dormitoryDetailService.UpdatePhotoUrls(detailId, photoUrls);
+
+            var dormitoryUpdated = _dormitoryDetailService.GetById(detailId);
+            return Ok(dormitoryUpdated);
+        }
+
         [HttpGet("getDormitoryDetailById")]
         public IActionResult Get(int id)
         {
 
             var dormitoryDetail = _dormitoryDetailService.GetById(id);
+            return Ok(dormitoryDetail);
+        }
+
+        [HttpGet("getDormitoryDetailByDormitoryId")]
+        public IActionResult getDormitoryDetailByDormitoryId(int id)
+        {
+            var dormitoryDetail = _dormitoryDetailService.GetByDormitoryId(id);
             return Ok(dormitoryDetail);
         }
     }

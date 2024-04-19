@@ -38,6 +38,11 @@ namespace Business.Concrete
             return _dormitoryDetailDal.Get(p => p.DetailId == id);
         }
 
+        public DormitoryDetail GetByDormitoryId(int id)
+        {
+            return _dormitoryDetailDal.Get(p => p.DormitoryId == id);
+        }
+
         public void Update(int DetailId,
                                   int DormitoryId,
                                   String ContactNo,
@@ -93,6 +98,16 @@ namespace Business.Concrete
                 dormitoryDetailsToUpdate.UpdatedAt = UpdatedAt;
 
             _dormitoryDetailDal.Update(dormitoryDetailsToUpdate);
+        }
+
+        public void UpdatePhotoUrls(int detailId, List<string> photoUrls)
+        {
+            var dormitoryDetailsToUpdate = _dormitoryDetailDal.Get(d => d.DetailId == detailId);
+            if (photoUrls != null)
+                dormitoryDetailsToUpdate.PhotoUrls = photoUrls;
+
+            _dormitoryDetailDal.Update(dormitoryDetailsToUpdate);
+
         }
     }
 }

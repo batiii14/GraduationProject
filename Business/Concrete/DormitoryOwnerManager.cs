@@ -21,6 +21,8 @@ namespace Business.Concrete
         }
         public void Add(DormitoryOwner dormitoryOwner)
         {
+            var hashedPassword=PasswordHasher.HashPassword(dormitoryOwner.Password);
+            dormitoryOwner.Password = hashedPassword;
             _dormitoryOwnerDal.Add(dormitoryOwner);
         }
 

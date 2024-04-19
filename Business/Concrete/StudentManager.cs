@@ -19,6 +19,8 @@ namespace Business.Concrete
         }
         public void Add(Student student)
         {
+            var hashedPassword=PasswordHasher.HashPassword(student.Password);
+            student.Password=hashedPassword;
             _studentDal.Add(student);
         }
 

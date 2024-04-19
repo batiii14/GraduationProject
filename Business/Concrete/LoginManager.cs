@@ -22,7 +22,7 @@ namespace Business.Concrete
             _studentDal = studentDal;
             
         }
-        public IEntity Login(string username, string password)
+        public IEntity Login(string email, string password)
         {
             var admins = _adminDal.GetList().ToList();
             var dormOwners = _dormitoryOwnerDal.GetList().ToList();
@@ -32,7 +32,7 @@ namespace Business.Concrete
 
             foreach (var item in students)
             {
-                if (item.Name == username && item.Password == password)
+                if (item.Email == email && item.Password == password)
                 {
                     userToLogin = item;
                     break; // Kullanıcı bulunduğunda döngüden çık
@@ -43,7 +43,7 @@ namespace Business.Concrete
             {
                 foreach (var item in admins)
                 {
-                    if (item.Name == username && item.Password == password)
+                    if (item.Email == email && item.Password == password)
                     {
                         userToLogin = item;
                         break;
@@ -52,7 +52,7 @@ namespace Business.Concrete
 
                 foreach (var item in dormOwners)
                 {
-                    if (item.Name == username && item.Password == password)
+                    if (item.Email == email && item.Password == password)
                     {
                         userToLogin = item;
                         break;

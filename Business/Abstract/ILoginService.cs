@@ -9,6 +9,6 @@ namespace Business.Abstract
 {
     public interface ILoginService
     {
-        IEntity Login(string username, string password);
+        IEntity Login(string email, string password);
     }
 }

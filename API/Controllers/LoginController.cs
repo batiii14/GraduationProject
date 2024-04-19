@@ -17,9 +17,9 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public ActionResult IsLoginValid(string userName, string Password)
+        public ActionResult IsLoginValid(string email, string Password)
         { //Model bilgilerini dönder
-            var result=_loginService.Login(userName, Password);
+            var result=_loginService.Login(email, Password);
 
             return Ok(result);
         }
