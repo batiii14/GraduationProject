@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class intiiiiii : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -106,6 +106,7 @@ namespace DataAccess.Migrations
                     HasTv = table.Column<bool>(type: "bit", nullable: false),
                     HasMicrowave = table.Column<bool>(type: "bit", nullable: false),
                     HasAirConditioning = table.Column<bool>(type: "bit", nullable: false),
+                    ImageUrlsJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

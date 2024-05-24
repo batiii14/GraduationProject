@@ -30,8 +30,7 @@ namespace Entities.Concrete
         public Boolean HasMicrowave { get; set; }
         public Boolean HasAirConditioning { get; set; }
 
-        [NotMapped]
-        public List<String> PhotoUrls { get; set; }
+        public string ImageUrlsJson { get; set; } = "[]";
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

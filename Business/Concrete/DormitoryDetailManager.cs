@@ -90,8 +90,7 @@ namespace Business.Concrete
             dormitoryDetailsToUpdate.HasMicrowave = HasMicrowave;
             dormitoryDetailsToUpdate.HasAirConditioning = HasAirConditioning;
 
-            if (PhotoUrls != null)
-                dormitoryDetailsToUpdate.PhotoUrls = PhotoUrls;
+            
             if (CreatedAt != null)
                 dormitoryDetailsToUpdate.CreatedAt = CreatedAt;
             if (UpdatedAt != null)
@@ -100,14 +99,26 @@ namespace Business.Concrete
             _dormitoryDetailDal.Update(dormitoryDetailsToUpdate);
         }
 
+        //public void UpdatePhotoUrls(int detailId, List<string> photoUrls)
+        //{
+        //    var dormitoryDetail = _dormitoryDetailDal.Get(d => d.DetailId == detailId);
+        //    if (dormitoryDetail == null)
+        //        throw new Exception("DormitoryDetail not found");
+
+        //    dormitoryDetail.ImageUrlsJson = photoUrls;
+        //    _dormitoryDetailDal.Update(dormitoryDetail);
+        //}
+
+        public void updateModel(DormitoryDetail dormitoryDetail)
+        {
+            var dormitoryDetailsToUpdate = _dormitoryDetailDal.Get(d => d.DetailId == dormitoryDetail.DetailId);
+            dormitoryDetailsToUpdate = dormitoryDetail;
+            _dormitoryDetailDal.Update(dormitoryDetailsToUpdate);
+        }
+
         public void UpdatePhotoUrls(int detailId, List<string> photoUrls)
         {
-            var dormitoryDetailsToUpdate = _dormitoryDetailDal.Get(d => d.DetailId == detailId);
-            if (photoUrls != null)
-                dormitoryDetailsToUpdate.PhotoUrls = photoUrls;
-
-            _dormitoryDetailDal.Update(dormitoryDetailsToUpdate);
-
+            throw new NotImplementedException();
         }
     }
 }

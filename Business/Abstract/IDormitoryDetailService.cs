@@ -16,5 +16,6 @@ namespace Business.Abstract
         DormitoryDetail GetById(int id);
         DormitoryDetail GetByDormitoryId(int id);
         void UpdatePhotoUrls(int detailId, List<string> photoUrls);
+        void updateModel(DormitoryDetail dormitoryDetail);
     }
 }

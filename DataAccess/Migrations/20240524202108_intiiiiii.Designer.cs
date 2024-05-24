@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GraduationProjectContext))]
-    [Migration("20240318202504_init")]
-    partial class init
+    [Migration("20240524202108_intiiiiii")]
+    partial class intiiiiii
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -222,6 +222,10 @@ namespace DataAccess.Migrations
 
                     b.Property<bool>("HasTv")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ImageUrlsJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InternetSpeed")
                         .IsRequired()

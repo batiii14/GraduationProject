@@ -6,55 +6,61 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Explicitly set the WebRootPath
+builder.WebHost.ConfigureAppConfiguration((hostingContext, config) =>
+{
+    IWebHostEnvironment env = hostingContext.HostingEnvironment;
+    env.WebRootPath = Path.Combine(env.ContentRootPath, "wwwroot");
+});
 
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Ornek
+// Dependency Injection
 builder.Services.AddScoped<IAdminService, AdminManager>();
-builder.Services.AddScoped<IAdminDal,AdminDal>();
+builder.Services.AddScoped<IAdminDal, AdminDal>();
 
-builder.Services.AddScoped<IBookingService,BookingManager>();
-builder.Services.AddScoped<IBookingDal,BookingDal>();
+builder.Services.AddScoped<IBookingService, BookingManager>();
+builder.Services.AddScoped<IBookingDal, BookingDal>();
 
-builder.Services.AddScoped<ICommentService,CommentManager>();
-builder.Services.AddScoped<ICommentDal,CommentDal>();
+builder.Services.AddScoped<ICommentService, CommentManager>();
+builder.Services.AddScoped<ICommentDal, CommentDal>();
 
-builder.Services.AddScoped<IDormitoryService,DormitoryManager>();
-builder.Services.AddScoped<IDormitoryDal,DormitoryDal>();
+builder.Services.AddScoped<IDormitoryService, DormitoryManager>();
+builder.Services.AddScoped<IDormitoryDal, DormitoryDal>();
 
-builder.Services.AddScoped<IDormitoryDetailService,DormitoryDetailManager>();
-builder.Services.AddScoped<IDormitoryDetailDal,DormitoryDetailDal>();
+builder.Services.AddScoped<IDormitoryDetailService, DormitoryDetailManager>();
+builder.Services.AddScoped<IDormitoryDetailDal, DormitoryDetailDal>();
 
-builder.Services.AddScoped<IDormitoryOwnerService,DormitoryOwnerManager>();
-builder.Services.AddScoped<IDormitoryOwnerDal,DormitoryOwnerDal>();
+builder.Services.AddScoped<IDormitoryOwnerService, DormitoryOwnerManager>();
+builder.Services.AddScoped<IDormitoryOwnerDal, DormitoryOwnerDal>();
 
-builder.Services.AddScoped<IMessageService,MessageManager>();
-builder.Services.AddScoped<IMessageDal,MessageDal>();
+builder.Services.AddScoped<IMessageService, MessageManager>();
+builder.Services.AddScoped<IMessageDal, MessageDal>();
 
-builder.Services.AddScoped<INotificationService,NotificationManager>();
-builder.Services.AddScoped<INotificationDal,NotificationDal>();
+builder.Services.AddScoped<INotificationService, NotificationManager>();
+builder.Services.AddScoped<INotificationDal, NotificationDal>();
 
-builder.Services.AddScoped<IRatingService,RatingManager>();
-builder.Services.AddScoped<IRatingDal,RatingDal>();
+builder.Services.AddScoped<IRatingService, RatingManager>();
+builder.Services.AddScoped<IRatingDal, RatingDal>();
 
-builder.Services.AddScoped<IRoomService,RoomManager>();
-builder.Services.AddScoped<IRoomDal,RoomDal>();
+builder.Services.AddScoped<IRoomService, RoomManager>();
+builder.Services.AddScoped<IRoomDal, RoomDal>();
 
-builder.Services.AddScoped<IStudentService,StudentManager>();
-builder.Services.AddScoped<IStudentDal,StudentDal>();
+builder.Services.AddScoped<IStudentService, StudentManager>();
+builder.Services.AddScoped<IStudentDal, StudentDal>();
 
-builder.Services.AddScoped<IUniversityService,UniversityManager>();
-builder.Services.AddScoped<IUniversityDal,UniversityDal>();
+builder.Services.AddScoped<IUniversityService, UniversityManager>();
+builder.Services.AddScoped<IUniversityDal, UniversityDal>();
 
 builder.Services.AddScoped<ILoginService, LoginManager>();
-builder.Services.AddScoped<ILoginDal,LoginDal>();
+builder.Services.AddScoped<ILoginDal, LoginDal>();
 
-builder.Services.AddScoped<IVerificationCodeService,VerificationCodeManager>();
-builder.Services.AddScoped<IVerificationCodeDal,VerificationCodeDal>();
+builder.Services.AddScoped<IVerificationCodeService, VerificationCodeManager>();
+builder.Services.AddScoped<IVerificationCodeDal, VerificationCodeDal>();
 
 builder.Services.AddTransient<IEmailSenderService, EmailSenderManager>();
 
@@ -71,6 +77,7 @@ app.UseCors(opt =>
        .AllowAnyMethod()
        .AllowCredentials();
 });
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -80,8 +87,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Enable serving static files from the wwwroot directory
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
-
+    
 app.Run();
