@@ -59,7 +59,6 @@ namespace Business.Concrete
                                   bool HasTv,
                                   bool HasMicrowave,
                                   bool HasAirConditioning,
-                                  List<String> PhotoUrls,
                                   DateTime CreatedAt,
                                   DateTime UpdatedAt)
         {
@@ -116,9 +115,5 @@ namespace Business.Concrete
             _dormitoryDetailDal.Update(dormitoryDetailsToUpdate);
         }
 
-        public void UpdatePhotoUrls(int detailId, List<string> photoUrls)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

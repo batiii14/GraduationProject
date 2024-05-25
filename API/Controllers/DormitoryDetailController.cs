@@ -56,23 +56,14 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(int DetailId, int DormitoryId, string ContactNo, string Email, string FaxNo, string Address, int Capacity, string Description, string InternetSpeed, bool HasKitchen, bool HasCleanService, bool HasShowerAndToilet, bool HasBalcony, bool HasTv, bool HasMicrowave, bool HasAirConditioning, List<string> PhotoUrls, DateTime CreatedAt, DateTime UpdatedAt)
+        public IActionResult Update(int DetailId, int DormitoryId, string ContactNo, string Email, string FaxNo, string Address, int Capacity, string Description, string InternetSpeed, bool HasKitchen, bool HasCleanService, bool HasShowerAndToilet, bool HasBalcony, bool HasTv, bool HasMicrowave, bool HasAirConditioning, DateTime CreatedAt, DateTime UpdatedAt)
         {
             var dormDetailToUpdate = _dormitoryDetailService.GetById(DetailId);
-            _dormitoryDetailService.Update(DetailId, DormitoryId, ContactNo, Email, FaxNo, Address, Capacity, Description, InternetSpeed, HasKitchen, HasCleanService, HasShowerAndToilet, HasBalcony, HasTv, HasMicrowave, HasAirConditioning, PhotoUrls, CreatedAt, UpdatedAt);
+            _dormitoryDetailService.Update(DetailId, DormitoryId, ContactNo, Email, FaxNo, Address, Capacity, Description, InternetSpeed, HasKitchen, HasCleanService, HasShowerAndToilet, HasBalcony, HasTv, HasMicrowave, HasAirConditioning, CreatedAt, UpdatedAt);
             dormDetailToUpdate = _dormitoryDetailService.GetById(DetailId);
             dormDetailToUpdate.UpdatedAt = DateTime.Now;
 
             return Ok(dormDetailToUpdate);
-        }
-
-        [HttpPut("updatePhotoUrls")]
-        public IActionResult UpdatePhotoUrls(int detailId, List<string> photoUrls)
-        {
-            _dormitoryDetailService.UpdatePhotoUrls(detailId, photoUrls);
-
-            var dormitoryUpdated = _dormitoryDetailService.GetById(detailId);
-            return Ok(dormitoryUpdated);
         }
 
         [HttpGet("getDormitoryDetailById")]
