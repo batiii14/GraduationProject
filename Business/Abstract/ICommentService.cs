@@ -14,5 +14,6 @@ namespace Business.Abstract
         void Update(int CommentId, int DormitoryId, String CommentContent, int UserId, DateTime CreatedAt, DateTime UpdatedAt);
         List<Comment> GetAll();
         Comment GetById(int id);
+        Comment GetCommentByDormitoryId(int id);
     }
 }
