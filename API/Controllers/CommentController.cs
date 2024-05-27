@@ -58,5 +58,12 @@ namespace API.Controllers
             var comment = _commentService.GetById(id);
             return Ok(comment);
         }
+
+        [HttpGet("getCommentByDormitoryId")]
+        public IActionResult GetCommentByDormitoryId(int id)
+        {
+            var comment= _commentService.GetCommentByDormitoryId(id);
+            return Ok(comment);
+        }
     }
 }

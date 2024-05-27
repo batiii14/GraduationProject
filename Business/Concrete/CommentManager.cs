@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,11 @@ namespace Business.Concrete
         public Comment GetById(int id)
         {
             return  _commentDal.Get(p => p.CommentId == id);
+        }
+
+        public Comment GetCommentByDormitoryId(int id)
+        {
+            return _commentDal.Get(p => p.DormitoryId == id);
         }
 
         public void Update(int CommentId,
