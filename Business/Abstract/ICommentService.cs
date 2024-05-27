@@ -15,5 +15,6 @@ namespace Business.Abstract
         List<Comment> GetAll();
         Comment GetById(int id);
         Comment GetCommentByDormitoryId(int id);
+        List<Comment> GetAllCommentsByDormitoryId(int dormId);
     }
 }

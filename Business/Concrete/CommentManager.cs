@@ -44,6 +44,13 @@ namespace Business.Concrete
             return _commentDal.Get(p => p.DormitoryId == id);
         }
 
+        public List<Comment> GetAllCommentsByDormitoryId(int dormId)
+        {
+            ICommentDal commentDal = new CommentDal();
+            var commentList= _commentDal.GetList().Where(p => p.DormitoryId == dormId).ToList();
+            return commentList;
+        }
+
         public void Update(int CommentId,
                            int DormitoryId,
                            String CommentContent,
