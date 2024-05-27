@@ -19,6 +19,7 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(DormitoryOwner dormitoryOwner)
         {
+            dormitoryOwner.UserType = "dormitoryOwner";
             dormitoryOwner.CreatedAt = DateTime.Now;
             dormitoryOwner.UpdatedAt = DateTime.Now;
             _dormitoryOwnerService.Add(dormitoryOwner); 

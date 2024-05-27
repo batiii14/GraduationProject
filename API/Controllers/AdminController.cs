@@ -25,6 +25,7 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Admin admin)
         {
+            admin.UserType = "admin";
             admin.CreatedAt= DateTime.Now;
             admin.UpdatedAt= DateTime.Now;
             _adminService.Add(admin);

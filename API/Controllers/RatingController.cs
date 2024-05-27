@@ -12,11 +12,13 @@ namespace API.Controllers
 
         IRatingService _ratingService;
         IBookingService _bookingService;
+        IDormitoryService _dormitoryService;
 
-        public RatingController(IRatingService ratingService, IBookingService bookingService)
+        public RatingController(IRatingService ratingService, IBookingService bookingService, IDormitoryService _dormitoryService)
         {
             _ratingService = ratingService;
             _bookingService = bookingService;
+            _dormitoryService = _dormitoryService;
         }
 
         [HttpPost("add")]
@@ -75,6 +77,13 @@ namespace API.Controllers
         {
 
             var rating = _ratingService.GetById(id);
+            return Ok(rating);
+        }
+
+        [HttpGet("getRatingByDormitoryId")]
+        public IActionResult GetRatingByDormitoryId(int id)
+        {
+            var rating = _ratingService.GetRatingByDormitoryId(id);
             return Ok(rating);
         }
     }

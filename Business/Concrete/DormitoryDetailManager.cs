@@ -59,6 +59,7 @@ namespace Business.Concrete
                                   bool HasTv,
                                   bool HasMicrowave,
                                   bool HasAirConditioning,
+                                  int Price,
                                   DateTime CreatedAt,
                                   DateTime UpdatedAt)
         {

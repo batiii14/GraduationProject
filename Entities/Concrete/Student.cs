@@ -12,6 +12,7 @@ namespace Entities.Concrete
     {
         [Key]
         public int UserId { get; set; }
+        public String UserType { get; set; }
         public String StudentNumber { get; set; }
         public String Department { get; set; }
         public String Gender { get; set; }

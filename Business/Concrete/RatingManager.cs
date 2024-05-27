@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,11 @@ namespace Business.Concrete
             return _ratingDal.Get(p => p.RatingId == id);
 
 
+        }
+
+        public Rating GetRatingByDormitoryId(int id)
+        {
+            return _ratingDal.Get(p => p.DormitoryId == id);
         }
 
         public void Update(int ratingId,

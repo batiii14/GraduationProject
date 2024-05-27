@@ -43,6 +43,7 @@ namespace API.Controllers
             booking.CreatedAt = DateTime.Now;
             booking.UpdatedAt = DateTime.Now;
             booking.Status = "Pending";
+            booking.PaymentStatus = "Pending";
             _bookingService.Add(booking);
             return Ok(booking);
         }

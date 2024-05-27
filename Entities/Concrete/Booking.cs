@@ -20,7 +20,12 @@ namespace Entities.Concrete
         [ForeignKey("Room")]
         public int RoomId { get; set; }
         public String Status { get; set; }
+        public String PaymentStatus { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public DateTime inMin { get; set; }
+        public DateTime inMax { get; set; }
+        public DateTime outMin { get; set; }
+        public DateTime outMax { get; set; }
     }
 }

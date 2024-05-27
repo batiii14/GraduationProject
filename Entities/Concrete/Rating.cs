@@ -18,6 +18,7 @@ namespace Entities.Concrete
         [ForeignKey("User")]
         public int UserId { get; set; }
         public int RatingNo { get; set; }
+        public String Review { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         

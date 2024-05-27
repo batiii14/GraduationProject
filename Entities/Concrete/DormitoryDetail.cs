@@ -29,6 +29,7 @@ namespace Entities.Concrete
         public Boolean HasTv { get; set; }
         public Boolean HasMicrowave { get; set; }
         public Boolean HasAirConditioning { get; set; }
+        public int Price { get; set; }
 
         public string ImageUrlsJson { get; set; } = "[]";
         public DateTime CreatedAt { get; set; }

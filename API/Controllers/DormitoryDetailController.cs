@@ -56,10 +56,10 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(int DetailId, int DormitoryId, string ContactNo, string Email, string FaxNo, string Address, int Capacity, string Description, string InternetSpeed, bool HasKitchen, bool HasCleanService, bool HasShowerAndToilet, bool HasBalcony, bool HasTv, bool HasMicrowave, bool HasAirConditioning, DateTime CreatedAt, DateTime UpdatedAt)
+        public IActionResult Update(int DetailId, int DormitoryId, string ContactNo, string Email, string FaxNo, string Address, int Capacity, string Description, string InternetSpeed, bool HasKitchen, bool HasCleanService, bool HasShowerAndToilet, bool HasBalcony, bool HasTv, bool HasMicrowave, bool HasAirConditioning,int Price, DateTime CreatedAt, DateTime UpdatedAt)
         {
             var dormDetailToUpdate = _dormitoryDetailService.GetById(DetailId);
-            _dormitoryDetailService.Update(DetailId, DormitoryId, ContactNo, Email, FaxNo, Address, Capacity, Description, InternetSpeed, HasKitchen, HasCleanService, HasShowerAndToilet, HasBalcony, HasTv, HasMicrowave, HasAirConditioning, CreatedAt, UpdatedAt);
+            _dormitoryDetailService.Update(DetailId, DormitoryId, ContactNo, Email, FaxNo, Address, Capacity, Description, InternetSpeed, HasKitchen, HasCleanService, HasShowerAndToilet, HasBalcony, HasTv, HasMicrowave, HasAirConditioning,Price, CreatedAt, UpdatedAt);
             dormDetailToUpdate = _dormitoryDetailService.GetById(DetailId);
             dormDetailToUpdate.UpdatedAt = DateTime.Now;
 
@@ -88,8 +88,6 @@ namespace API.Controllers
                 if (dto.ImageFile == null || dto.ImageFile.Length == 0)
                     return BadRequest("Image is null or empty");
 
-                string imageUrl = $"/uploads/{dto.ImageFile.FileName}";
-
                 var dormitoryDetail = _dormitoryDetailService.GetById(dto.DetailId);
                 if (dormitoryDetail == null)
                     return NotFound("DormitoryDetail not found");
@@ -97,18 +95,25 @@ namespace API.Controllers
                 if (string.IsNullOrEmpty(_hostingEnvironment.WebRootPath))
                     return StatusCode(500, "Server configuration error: WebRootPath is not set.");
 
+                // Ensure the uploads directory exists
                 var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
                 if (!Directory.Exists(uploads))
                     Directory.CreateDirectory(uploads);
 
+                // Save the file
                 var filePath = Path.Combine(uploads, dto.ImageFile.FileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await dto.ImageFile.CopyToAsync(fileStream);
                 }
-                
-                Console.WriteLine($"ImageUrlsJson before update: {dormitoryDetail.ImageUrlsJson}");
 
+                // Construct the full path on the computer
+                string fullPathOnComputer = Path.Combine(uploads, dto.ImageFile.FileName);
+
+                // Log the full path for debugging purposes
+                Console.WriteLine($"Full Path on Computer: {fullPathOnComputer}");
+
+                // Update the DormitoryDetail with the new image URL
                 List<string> imageUrls = new List<string>();
                 if (!string.IsNullOrEmpty(dormitoryDetail.ImageUrlsJson))
                 {
@@ -122,7 +127,7 @@ namespace API.Controllers
                         return BadRequest("Error parsing ImageUrlsJson");
                     }
                 }
-                imageUrls.Add(imageUrl);
+                imageUrls.Add(fullPathOnComputer);  // Use the full path instead of the web URL
                 dormitoryDetail.ImageUrlsJson = JsonSerializer.Serialize(imageUrls);
 
                 _dormitoryDetailService.updateModel(dormitoryDetail);
@@ -135,6 +140,8 @@ namespace API.Controllers
                 return StatusCode(500, "An error occurred while processing the request.");
             }
         }
+
+
 
 
         [HttpGet("getImages")]

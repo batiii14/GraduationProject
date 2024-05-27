@@ -107,6 +107,22 @@ namespace Business.Concrete
 
         }
 
+        public List<Booking> GetAllPaymentsForSpecificDormitory(int dormId)
+        {
+            IBookingDal bookingDal = new BookingDal();
+            var bookingList = bookingDal.GetList().Where(p => p.DormitoryId == dormId && p.PaymentStatus == "Pending").ToList();
+            return bookingList;
+
+        }
+
+        public Booking ApprovePayment(int bookingId)
+        {
+            IBookingDal bookingDal = new BookingDal();
+            var booking = bookingDal.Get(p => p.BookingId == bookingId);
+            booking.PaymentStatus = "Approved";
+            return booking;
+        }
+
         public Boolean ApproveStudentsBookingRequest(int bookingId)
         {
             var result = false;
@@ -126,7 +142,7 @@ namespace Business.Concrete
                 notification.CreatedAt = DateTime.Now;
                 notification.Seen = false;
                 notification.Description = "Your booking has been approved";
-                notification.ImageUrl = "asdasd";
+                notification.ImageUrl = "";
                 NotificationDal notificationDal = new NotificationDal();
                 notificationDal.Add(notification);
 

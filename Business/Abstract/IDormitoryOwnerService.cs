@@ -18,5 +18,7 @@ namespace Business.Abstract
         Boolean ApproveStudentsBookingRequest(int bookingId);
         List<Booking> GetPendingBookingsForSpecificDormitory(int dormId);
         List<Booking> GetAllBookingsForSpecificDormitory(int dormId);
+        List<Booking> GetAllPaymentsForSpecificDormitory(int dormId);
+        Booking ApprovePayment(int bookingId);
     }
 }

@@ -23,6 +23,7 @@ namespace API.Controllers
         [HttpPost("add")]
         public IActionResult Add(Student student)
         {
+            student.UserType = "student";
             student.isEmailVerified = false;
             student.CreatedAt = DateTime.Now;
             student.UpdatedAt = DateTime.Now;

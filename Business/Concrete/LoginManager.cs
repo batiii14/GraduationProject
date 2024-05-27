@@ -20,14 +20,14 @@ namespace Business.Concrete
             _adminDal = adminDal;
             _dormitoryOwnerDal = dormitoryOwnerDal;
             _studentDal = studentDal;
-            
         }
-        public IEntity Login(string email, string password)
+
+        public LoginResult Login(string email, string password)
         {
             var admins = _adminDal.GetList().ToList();
             var dormOwners = _dormitoryOwnerDal.GetList().ToList();
             var students = _studentDal.GetList().ToList();
-             password = PasswordHasher.HashPassword(password);
+            password = PasswordHasher.HashPassword(password);
             IEntity userToLogin = null;
 
             foreach (var item in students)
@@ -35,11 +35,11 @@ namespace Business.Concrete
                 if (item.Email == email && item.Password == password)
                 {
                     userToLogin = item;
-                    break; // Kullanıcı bulunduğunda döngüden çık
+                    break; // User found, exit loop
                 }
             }
 
-            if (userToLogin == null) // Eğer kullanıcı henüz bulunmadıysa diğer listelere bak
+            if (userToLogin == null) // If user not found, check other lists
             {
                 foreach (var item in admins)
                 {
@@ -62,11 +62,10 @@ namespace Business.Concrete
 
             if (userToLogin == null)
             {
-                throw new Exception("Kullanıcı bulunamadı."); 
+                return new LoginResult { IsSuccessful = false, Message = "User not found" };
             }
 
-            return userToLogin;
+            return new LoginResult { IsSuccessful = true, User = userToLogin };
         }
-
     }
 }

@@ -15,13 +15,17 @@ namespace API.Controllers
             _loginService = loginService;
         }
 
-
         [HttpGet]
-        public ActionResult IsLoginValid(string email, string Password)
-        { //Model bilgilerini dönder
-            var result=_loginService.Login(email, Password);
+        public ActionResult IsLoginValid(string email, string password)
+        {
+            var result = _loginService.Login(email, password);
 
-            return Ok(result);
+            if (!result.IsSuccessful)
+            {
+                return NotFound(new { message = result.Message });
+            }
+
+            return Ok(result.User);
         }
     }
 }
