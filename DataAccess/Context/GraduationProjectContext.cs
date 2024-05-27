@@ -27,5 +27,6 @@ namespace DataAccess.Context
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<University> Universities { get; set; }
+        public DbSet<VerificationCode> VerificationCodes { get; set; }
     }
 }
