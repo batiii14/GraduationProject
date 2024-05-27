@@ -94,5 +94,19 @@ namespace API.Controllers
             var result=_dormitoryOwnerService.ApproveStudentsBookingRequest(bookingId);
             return Ok(result);
         }
+
+        [HttpPut("ApprovePaymentRequest")]
+        public IActionResult ApprovePayment(int bookingId)
+        {
+            var booking = _dormitoryOwnerService.ApprovePayment(bookingId);
+            return Ok(booking);
+        }
+
+        [HttpGet("GetAllPaymentsForSpecificDormitory")]
+        public IActionResult GetAllPaymentsForSpecificDormitory(int dormId) { 
+        var bookingList= _dormitoryOwnerService.GetAllPaymentsForSpecificDormitory(dormId) ;
+            return Ok(bookingList);
+        }
+
     }
 }
