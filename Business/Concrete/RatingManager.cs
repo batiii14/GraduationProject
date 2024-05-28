@@ -41,10 +41,11 @@ namespace Business.Concrete
 
         }
 
-        public Rating GetRatingByDormitoryId(int id)
+        public List<Rating> GetRatingByDormitoryId(int id)
         {
-            return _ratingDal.Get(p => p.DormitoryId == id);
+            return _ratingDal.GetList(p => p.DormitoryId == id).ToList();
         }
+
 
         public void Update(int ratingId,
                          int dormitoryId,
