@@ -20,5 +20,7 @@ namespace Business.Abstract
         List<Booking> GetAllBookingsForSpecificDormitory(int dormId);
         List<Booking> GetAllPaymentsForSpecificDormitory(int dormId);
         Booking ApprovePayment(int bookingId);
+
+        Booking GetApprovedBookingByUserId(int studentId);
     }
 }

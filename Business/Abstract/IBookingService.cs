@@ -14,5 +14,6 @@ namespace Business.Abstract
         void Update(int BookingId, int UserId, int DormitoryId, int RoomId, String Status, DateTime CreatedAt, DateTime UpdatedAt);
         List<Booking> GetAll();
         Booking GetById(int id);
+        List<Booking> getAllBookingByDormId(int DormitoryId);
     }
 }

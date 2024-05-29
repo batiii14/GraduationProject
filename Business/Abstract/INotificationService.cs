@@ -14,6 +14,7 @@ namespace Business.Abstract
         void Update(int notificationId, int recieverId, int senderId, String title, string description, String imageUrl, DateTime? createdAt, DateTime? updatedAt);
         List<Notification> GetAll();
         Notification GetById(int id);
-        Notification GetNotificationByStudentId(int studentId);
+        List<Notification> GetNotificationByStudentId(int studentId);
+        void SendNotificationToAllByDormId(int dormId, Notification notification);
     }
 }

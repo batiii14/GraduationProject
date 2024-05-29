@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -69,16 +70,18 @@ namespace Business.Concrete
             _notificationDal.Update(notificationToUpdate);
         }
 
-        public Notification GetNotificationByStudentId(int studentId)
+        public List<Notification> GetNotificationByStudentId(int studentId)
         {
             Notification _notification = new Notification();
+            List<Notification> notifications = new List<Notification>();
             var notificationList = _notificationDal.GetList().ToList();
             foreach (var notification in notificationList)
             {
                 if (notification.RecieverId == studentId)
                 {
                     _notification = notification;
-                    break;
+                    notifications.Add(notification);
+
                 }
 
             }
@@ -87,7 +90,28 @@ namespace Business.Concrete
                 throw new Exception("Kullanıcıya ait bir bildirim yok");
             }
 
-            return _notification;
+            return notifications;
+        }
+
+        public void SendNotificationToAllByDormId(int dormId, Notification notification)
+        {
+            IBookingDal bookingDal = new BookingDal();
+
+            foreach (var item in bookingDal.GetList())
+            {
+                if (item.DormitoryId == dormId)
+                {
+                    Notification notification1 = new Notification();
+                    notification1.Title = notification.Title;
+                    notification1.SenderId = notification.SenderId;
+                    notification1.RecieverId = item.UserId;
+                    notification1.ImageUrl = "";
+                    notification1.Description = notification.Description;
+                    notification1.Seen = notification.Seen;
+                    _notificationDal.Add(notification1);
+
+                }
+            }
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Business.Concrete
             if (Email != null)
                 adminToUpdate.Email = Email;
             if (Password != null)
-                adminToUpdate.Password = Password;
+                adminToUpdate.Password = PasswordHasher.HashPassword(Password);
             if (Address != null)
                 adminToUpdate.Address = Address;
             if (PhoneNo != null)

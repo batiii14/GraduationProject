@@ -82,5 +82,14 @@ namespace API.Controllers
             var booking = _bookingService.GetById(id);
             return Ok(booking);
         }
+
+        [HttpGet("getBookingsByDormitoryId")]
+        public IActionResult GetBookingsByDormitoryId(int dormitoryId)
+        {
+
+            var bookings = _bookingService.getAllBookingByDormId(dormitoryId);
+            return Ok(bookings);
+        }
+
     }
 }

@@ -11,6 +11,13 @@ namespace API.Controllers
     {
         IRoomService _roomService;
 
+        [HttpGet("getRoomByDormitoryId")]
+        public IActionResult GetByDormitoryId(int dormId)
+        {
+
+            var rooms = _roomService.GetAllByDormitoryId(dormId);
+            return Ok(rooms);
+        }
         public RoomController(IRoomService roomService)
         {
             _roomService = roomService;

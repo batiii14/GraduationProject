@@ -108,5 +108,13 @@ namespace API.Controllers
             return Ok(bookingList);
         }
 
+        [HttpGet("getApprovedBookingByUserId")]
+        public IActionResult GetApprovedBookingByUserId(int id)
+        {
+
+            var approvedBooking = _dormitoryOwnerService.GetApprovedBookingByUserId(id);
+            return Ok(approvedBooking);
+        }
+
     }
 }

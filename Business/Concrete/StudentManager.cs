@@ -80,7 +80,7 @@ namespace Business.Concrete
             if (email != null)
                 studentToUpdate.Email = email;
             if (password != null)
-                studentToUpdate.Password = password;
+                studentToUpdate.Password = PasswordHasher.HashPassword(password);
             if (address != null)
                 studentToUpdate.Address = address;
             if (phoneNo != null)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(GraduationProjectContext))]
-    [Migration("20240526180645_initzort")]
-    partial class initzort
+    [Migration("20240527201726_initzortto")]
+    partial class initzortto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,10 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Admins");
@@ -89,6 +93,10 @@ namespace DataAccess.Migrations
                     b.Property<int>("DormitoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
@@ -101,6 +109,18 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("inMax")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("inMin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("outMax")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("outMin")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("BookingId");
 
@@ -231,6 +251,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -286,6 +309,10 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
@@ -377,6 +404,10 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("RatingNo")
                         .HasColumnType("int");
+
+                    b.Property<string>("Review")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -478,6 +509,10 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isEmailVerified")
                         .HasColumnType("bit");

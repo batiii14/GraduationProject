@@ -18,6 +18,21 @@ namespace Business.Concrete
             _bookingDal = bookingDal;
         }
 
+        public List<Booking> getAllBookingByDormId(int DormitoryId)
+        {
+            var bookings = _bookingDal.GetList().ToList();
+            var bookingToSend = new List<Booking>();
+            foreach (var booking in bookings)
+            {
+                if (booking.DormitoryId == DormitoryId)
+                {
+                    bookingToSend.Add(booking);
+                }
+            }
+
+            return bookingToSend;
+        }
+
         public void Add(Booking booking)
         {
            _bookingDal.Add(booking);    
@@ -65,5 +80,7 @@ namespace Business.Concrete
 
             _bookingDal.Update(bookingToUpdate);
         }
+
+
     }
 }

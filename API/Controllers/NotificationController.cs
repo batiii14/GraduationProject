@@ -67,5 +67,14 @@ namespace API.Controllers
             var notification = _notificationService.GetById(id);
             return Ok(notification);
         }
+
+        [HttpPost("SendNotificationToAllByDormId")]
+        public IActionResult SendNotificationToAllByDormId(int dormitoryId, Notification notification)
+        {
+            notification.CreatedAt = DateTime.Now;
+            notification.UpdatedAt = DateTime.Now;
+            _notificationService.SendNotificationToAllByDormId(dormitoryId, notification);
+            return Ok(notification);
+        }
     }
 }

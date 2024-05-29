@@ -67,7 +67,7 @@ namespace Business.Concrete
             if (Email != null)
                 userToUpdate.Email = Email;
             if (Password != null)
-                userToUpdate.Password = Password;
+                userToUpdate.Password = PasswordHasher.HashPassword(Password);
             if (Address != null)
                 userToUpdate.Address = Address;
             if (PhoneNo != null)
@@ -155,6 +155,26 @@ namespace Business.Concrete
             return result;
             
 
+        }
+
+        public Booking GetApprovedBookingByUserId(int studentId)
+        {
+            IBookingDal bookingDal = new BookingDal();
+            var bookings = bookingDal.GetList().ToList();
+            var bookingToReturn=new Booking();
+            foreach (var booking in bookings)
+            {
+                if (booking.UserId == studentId)
+                {
+                    if(booking.Status == "Approved")
+                    {
+                        bookingToReturn=booking;
+                    }
+
+                }
+            }
+            
+            return bookingToReturn;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Business.Abstract
     {
         void Add(Room room);
         void Delete(int id);
+        List<Room> GetAllByDormitoryId(int dormitoryId);
         void Update(int roomId,
                        int dormitoryId,
                        String roomType,

@@ -17,6 +17,21 @@ namespace Business.Concrete
         {
             _roomDal=roomDal;
         }
+        public List<Room> GetAllByDormitoryId(int dormitoryId)
+        {
+            var rooms = _roomDal.GetList().ToList();
+            var roomsToSend = new List<Room>();
+            foreach (var room in rooms)
+            {
+                if (room.DormitoryId == dormitoryId)
+                {
+                    roomsToSend.Add(room);
+                }
+            }
+
+            return roomsToSend;
+
+        }
         public void Add(Room room)
         {
             _roomDal.Add(room);
